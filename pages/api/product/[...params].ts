@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import data from "../data.json";
-import { INotFound, ProductResponse } from "../types";
+import { INotFound, ProductResponse, IProduct } from "../../../types";
 
 export default (
   req: NextApiRequest,
@@ -18,7 +18,7 @@ export default (
     }
     // const products =
     if (Array.isArray(foundCategory.products)) {
-      const foundProduct = (foundCategory.products as Array<Product>).find(
+      const foundProduct = (foundCategory.products as Array<IProduct>).find(
         (el) => el.id === Number(productId),
       );
       if (!foundProduct) {

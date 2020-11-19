@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import data from "../data.json";
-import { ICategory, INotFound } from "../types";
+import { ICategory, INotFound } from "../../../types";
 
 export default (
   req: NextApiRequest,
@@ -15,6 +15,6 @@ export default (
     res.statusCode = 404;
     return res.json({ message: "No Products Found" });
   }
-  res.statusCode = 200;
-  res.json(foundCategory);
+  // res.statusCode = 200;
+  // res.json(foundCategory);
 };
