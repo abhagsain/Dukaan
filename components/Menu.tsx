@@ -62,4 +62,6 @@ const SMenuContainer = styled.a`
 `;
 const SMenuItem = styled.p`
   font-size: 0.875rem;
+  font-weight: 500;
+  color: #b3b3b3;
 `;

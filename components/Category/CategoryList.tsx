@@ -10,7 +10,6 @@ export const CategoryContainer = styled.div`
   white-space: nowrap;
   overflow-x: scroll;
   overflow-y: hidden;
-  padding: 1rem 0;
   max-width: 100%;
   &::-webkit-scrollbar {
     display: none;

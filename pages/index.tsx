@@ -5,18 +5,7 @@ import { ITopCategories, ITopProducts } from "../types";
 import { getData } from "../utils";
 import { CategoryList } from "../components/Category";
 import Menu from "../components/Menu";
-const OuterContainer = styled.div`
-  padding: 0 2rem;
-  width: 100%;
-  margin: 0 auto;
-  max-width: ${({ theme }) => theme.maxWidth};
-  margin: 0 auto;
-`;
-export const SectionHeading = styled.h2`
-  font-size: ${({ theme }) => theme.fontSize.xl};
-  font-weight: bold;
-  margin-bottom: ${({ theme }) => theme.spacing["5"]};
-`;
+import SearchBar from "../components/SearchBar";
 
 interface ProductsSectionProps {}
 
@@ -38,10 +27,18 @@ export default function Home({
 }: HomeProps): ReactElement {
   return (
     <OuterContainer>
-      <SectionHeading>My Dukaan</SectionHeading>
+      {/* <div>
+        <div>Icon</div>
+        <div>
+          <div>Daily Needs</div>
+          <div>Verify Seller</div>
+        </div>
+      </div> */}
+      <SearchBar />
+      <Spacer />
       <SectionHeading>Top Categories</SectionHeading>
       <CategoryList categories={top_categories} />
-      <ProductsSection />
+      {/* <ProductsSection /> */}
       <Menu />
     </OuterContainer>
   );
@@ -51,3 +48,19 @@ export const getStaticProps: GetStaticProps<IStaticProps> = async () => {
   const data = getData();
   return { props: data };
 };
+const OuterContainer = styled.div`
+  /* padding: 0 2rem; */
+  width: 100%;
+  margin: 0 auto;
+  max-width: ${({ theme }) => theme.maxWidth};
+  margin: 0 auto;
+`;
+export const SectionHeading = styled.h2`
+  font-size: ${({ theme }) => theme.fontSize.xl};
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.primary};
+  margin-bottom: ${({ theme }) => theme.spacing["5"]};
+`;
+export const Spacer = styled.div`
+  margin-top: ${({ theme }) => theme.spacing["6"]};
+`;
