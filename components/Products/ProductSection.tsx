@@ -129,7 +129,7 @@ const SProductImage = styled.img`
     opacity: 0.75;
   }
 `;
-const SProductGridItem = styled.a`
+const SProductGridItem = styled.div`
   width: 100%;
 `;
 const SProductBody = styled.div`
