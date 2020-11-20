@@ -7,6 +7,7 @@ export interface ITheme {
     white: string;
     black: string;
     gray: string;
+    gray1: string;
     darkGray: string;
   };
   fontSize: {
@@ -52,6 +53,7 @@ const theme = {
     white: "#fff",
     black: "#000",
     gray: "#f2f2f2",
+    gray1: "#fafafa",
     darkGray: "#98989898",
   },
   fontSize: {

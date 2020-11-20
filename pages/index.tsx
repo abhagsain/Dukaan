@@ -1,21 +1,13 @@
 import { GetStaticProps } from "next";
 import React, { ReactElement } from "react";
 import styled from "styled-components";
-import { ITopCategories, ITopProducts } from "../types";
-import { getData } from "../utils";
 import { CategoryList } from "../components/Category";
 import Menu from "../components/Menu";
 import SearchBar from "../components/SearchBar";
+import { ITopCategories, ITopProducts } from "../types";
+import { getData } from "../utils";
+import { ProductSection } from "../components/Products";
 
-interface ProductsSectionProps {}
-
-function ProductsSection({}: ProductsSectionProps): ReactElement {
-  return (
-    <div>
-      <h2>Name</h2>
-    </div>
-  );
-}
 type HomeProps = IStaticProps;
 interface IStaticProps {
   top_categories: ITopCategories[];
@@ -38,7 +30,10 @@ export default function Home({
       <Spacer />
       <SectionHeading>Top Categories</SectionHeading>
       <CategoryList categories={top_categories} />
-      {/* <ProductsSection /> */}
+      {top_products.map((product) => {
+        return <ProductSection key={product.category_name} {...product} />;
+      })}
+      <div style={{ marginBottom: "6rem" }}></div>
       <Menu />
     </OuterContainer>
   );
@@ -61,6 +56,6 @@ export const SectionHeading = styled.h2`
   color: ${({ theme }) => theme.colors.primary};
   margin-bottom: ${({ theme }) => theme.spacing["5"]};
 `;
-export const Spacer = styled.div`
+const Spacer = styled.div`
   margin-top: ${({ theme }) => theme.spacing["6"]};
 `;

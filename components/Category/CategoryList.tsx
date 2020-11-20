@@ -6,6 +6,27 @@ import { ICategory } from "../../types";
 interface Props {
   categories: ICategory[];
 }
+
+export default function CategoryList({ categories }: Props): ReactElement {
+  return (
+    <CategoryContainer>
+      {categories.map((category) => (
+        <Link href={`/products/?cat=${category.id}`} key={category.id} passHref>
+          <CategoryItem>
+            <CategoryImage
+              src={category.image}
+              alt=""
+              srcSet={category.image}
+            />
+            <CategoryOverlay>
+              <CategoryLabel>{category.name.toLowerCase()}</CategoryLabel>
+            </CategoryOverlay>
+          </CategoryItem>
+        </Link>
+      ))}
+    </CategoryContainer>
+  );
+}
 export const CategoryContainer = styled.div`
   white-space: nowrap;
   overflow-x: scroll;
@@ -16,6 +37,7 @@ export const CategoryContainer = styled.div`
   }
   scrollbar-width: none;
   -ms-overflow-style: none;
+  padding-bottom: ${({ theme }) => theme.spacing["4"]};
 `;
 export const CategoryItem = styled.a`
   display: inline-block;
@@ -59,23 +81,3 @@ export const CategoryOverlay = styled.div`
     opacity: 0.8;
   }
 `;
-export default function CategoryList({ categories }: Props): ReactElement {
-  return (
-    <CategoryContainer>
-      {categories.map((category) => (
-        <Link href={`/products/?cat=${category.id}`} key={category.id} passHref>
-          <CategoryItem>
-            <CategoryImage
-              src={category.image}
-              alt=""
-              srcSet={category.image}
-            />
-            <CategoryOverlay>
-              <CategoryLabel>{category.name.toLowerCase()}</CategoryLabel>
-            </CategoryOverlay>
-          </CategoryItem>
-        </Link>
-      ))}
-    </CategoryContainer>
-  );
-}
