@@ -17,11 +17,16 @@ const IconHome = () => (
   </svg>
 );
 const IconCategories = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" class="navbar-active-icon">
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    className="navbar-active-icon"
+  >
     <g
-      fill-rule="evenodd"
-      stroke-linejoin="round"
-      stroke-width="1.8"
+      fillRule="evenodd"
+      strokeLinejoin="round"
+      strokeWidth="1.8"
       transform="translate(3.004 3)"
     >
       <rect width="6.991" height="6.991" rx="0.5"></rect>
@@ -68,7 +73,7 @@ const SFooter = styled.footer`
   width: 100%;
 `;
 const SFooterWrapper = styled.div`
-  max-width: 71.25rem;
+  max-width: ${({ theme }) => theme.maxWidth};
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -77,11 +82,11 @@ const SMenuContainer = styled.a`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 0.25rem;
+  margin-top: ${({ theme }) => theme.spacing["1"]};
   margin-bottom: 0.625rem;
   justify-content: center;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
+  padding: ${({ theme }) => `${theme.spacing["2"]} ${theme.spacing["4"]}`};
+  font-size: ${({ theme }) => theme.fontSize.sm};
 `;
 const SMenuItem = styled.p`
   font-size: 0.875rem;

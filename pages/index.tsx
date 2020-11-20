@@ -9,13 +9,13 @@ const OuterContainer = styled.div`
   padding: 0 2rem;
   width: 100%;
   margin: 0 auto;
-  max-width: 71.25rem;
+  max-width: ${({ theme }) => theme.maxWidth};
   margin: 0 auto;
 `;
 export const SectionHeading = styled.h2`
-  font-size: 1.25rem;
+  font-size: ${({ theme }) => theme.fontSize.xl};
   font-weight: bold;
-  margin-bottom: 1.25rem;
+  margin-bottom: ${({ theme }) => theme.spacing["5"]};
 `;
 
 interface ProductsSectionProps {}

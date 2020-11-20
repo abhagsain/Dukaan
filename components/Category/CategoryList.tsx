@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { ICategory } from "../../../types";
+import { ICategory } from "../../types";
 
 interface Props {
   categories: ICategory[];
@@ -17,33 +17,12 @@ export const CategoryContainer = styled.div`
   }
   scrollbar-width: none;
   -ms-overflow-style: none;
-
-  /* ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-
-  ::-webkit-scrollbar-track {
-    border-radius: 5px;
-    background: #f1f1f1;
-  }
-
-
-  ::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    background: #c0c0c0;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #999999;
-  } */
 `;
 export const CategoryItem = styled.a`
   display: inline-block;
   position: relative;
   &:not(:last-child) {
-    margin-right: 1rem;
+    margin-right: ${({ theme }) => theme.spacing["4"]};
   }
 `;
 export const CategoryImage = styled.img`
@@ -52,12 +31,12 @@ export const CategoryImage = styled.img`
   border-radius: 0.5rem;
 `;
 export const CategoryLabel = styled.h4`
-  font-size: 0.875rem;
-  padding-bottom: 1rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  font-size: ${({ theme }) => theme.fontSize.sm};
+  padding-bottom: ${({ theme }) => theme.spacing["4"]};
+  padding-left: ${({ theme }) => theme.spacing["2"]};
+  padding-right: ${({ theme }) => theme.spacing["2"]};
   font-weight: 600;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.white};
   text-transform: capitalize;
   white-space: pre-wrap;
 `;
