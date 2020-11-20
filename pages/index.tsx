@@ -3,10 +3,12 @@ import React, { ReactElement } from "react";
 import styled from "styled-components";
 import { ITopCategories, ITopProducts } from "../types";
 import { getData } from "../utils";
-import { CategoryList } from "./components/Category";
+import { CategoryList } from "../components/Category";
+import Menu from "../components/Menu";
 const OuterContainer = styled.div`
   padding: 0 2rem;
   width: 100%;
+  margin: 0 auto;
   max-width: 71.25rem;
   margin: 0 auto;
 `;
@@ -39,6 +41,8 @@ export default function Home({
       <SectionHeading>My Dukaan</SectionHeading>
       <SectionHeading>Top Categories</SectionHeading>
       <CategoryList categories={top_categories} />
+      <ProductsSection />
+      <Menu />
     </OuterContainer>
   );
 }
