@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps<IStaticProps> = async () => {
   return { props: data };
 };
 const OuterContainer = styled.div`
-  /* padding: 0 2rem; */
+  padding: 0 1rem;
   width: 100%;
   margin: 0 auto;
   max-width: ${({ theme }) => theme.maxWidth};

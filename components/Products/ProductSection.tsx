@@ -118,7 +118,8 @@ const SProductSectionHeader = styled.div`
 const SProductGrid = styled.div`
   display: grid;
   margin-top: ${({ theme }) => theme.spacing["4"]};
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
   gap: ${({ theme }) => theme.spacing["4"]};
 `;
 const SProductImage = styled.img`
