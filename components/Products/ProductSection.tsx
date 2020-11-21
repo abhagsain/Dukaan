@@ -14,11 +14,7 @@ const ButtonAdd = ({
   addToCart: () => void;
 }) => {
   return (
-    <SProductButton
-      type="button"
-      // isInCart={isInCart}
-      onClick={() => addToCart()}
-    >
+    <SButtonAdd type="button" onClick={() => addToCart()}>
       <span>Add </span>
       <svg
         className="addPlusIcon"
@@ -32,7 +28,7 @@ const ButtonAdd = ({
           <path d="M11.25 5.25c.414 0 .75.336.75.75 0 .385-.29.702-.663.745l-.087.005H.75C.336 6.75 0 6.414 0 6c0-.385.29-.702.663-.745L.75 5.25h10.5z"></path>
         </g>
       </svg>
-    </SProductButton>
+    </SButtonAdd>
   );
 };
 
@@ -46,7 +42,7 @@ const ButtonCounter = ({
   removeFromCart: () => void;
 }) => {
   return (
-    <SButtonCounter>
+    <SButtonCounter className="button-counter">
       <SIconWrapper onClick={() => removeFromCart()}>
         <IconMinus />
       </SIconWrapper>
@@ -193,7 +189,6 @@ const SProductGridItem = styled.div`
 const SProductBody = styled.div`
   display: flex;
   flex-direction: column;
-  /* margin-top: ${({ theme }) => theme.spacing["4"]}; */
   & h2 {
     font-size: ${({ theme }) => theme.fontSize.base};
     font-weight: 500;
@@ -214,7 +209,7 @@ const SProductPrice = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-const SProductButton = styled.button`
+const SButtonAdd = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.accent};
   display: flex;
   justify-content: space-between;
@@ -235,11 +230,9 @@ const SProductButton = styled.button`
       fill: ${({ theme }) => theme.colors.white};
     }
   }
-  &::focus {
+  &:focus {
     outline: none;
-    border: 0;
-    /* box-shadow: ${({ theme }) => theme.shadowOutline}; */
-    border: 2px solid red;
+    border: 1px solid ${({ theme }) => theme.colors.accent};
   }
   & svg {
     fill: #146eb4;
@@ -253,7 +246,7 @@ const SIconWrapper = styled.div`
   flex: 1;
   cursor: pointer;
 `;
-const SButtonCounter = styled.button`
+const SButtonCounter = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.accent};
   width: 97.5px;
   background-color: ${({ theme }) => theme.colors.white};
@@ -264,7 +257,7 @@ const SButtonCounter = styled.button`
   border-radius: 0.25rem;
 `;
 const SProductCount = styled.p`
-  padding: 0.5rem 0;
+  padding: 0.4rem 0;
   background-color: #146eb41a;
   display: flex;
   justify-content: center;
