@@ -7,6 +7,7 @@ import SearchBar from "../components/SearchBar";
 import { ITopCategories, ITopProducts } from "../types";
 import { getData } from "../utils";
 import { ProductSection } from "../components/Products";
+import { useApp } from "../context/AppContext";
 
 type HomeProps = IStaticProps;
 interface IStaticProps {

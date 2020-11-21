@@ -1,10 +1,12 @@
 import Link from "next/link";
 import React, { ReactElement } from "react";
 import styled, { ThemedStyledFunction } from "styled-components";
+import { useApp } from "../context/AppContext";
 import { IconBag, IconCategories, IconHome, IconOrders } from "./helpers";
 
 interface Props {}
 export default function Menu({}: Props): ReactElement {
+  const { cart } = useApp();
   return (
     <SFooter>
       <SFooterWrapper>
@@ -23,7 +25,7 @@ export default function Menu({}: Props): ReactElement {
         <Link href="/" passHref>
           <SMenuContainer>
             <IconBag />
-            <SMenuItem>Bag</SMenuItem>
+            <SMenuItem>Bag {cart.length && cart.length}</SMenuItem>
           </SMenuContainer>
         </Link>
         <Link href="/" passHref>

@@ -1,16 +1,70 @@
 import Link from "next/link";
-import React, { ReactElement } from "react";
+import React, { Fragment, ReactElement } from "react";
 import styled from "styled-components";
-import { ITopProducts } from "../../types";
+import { useApp } from "../../context/AppContext";
+import { IProduct, ITopProducts } from "../../types";
+import { IconMinus, IconPlus } from "../helpers";
 
 interface ProductsSectionProps extends ITopProducts {}
+const ButtonAdd = ({
+  isInCart,
+  addToCart,
+}: {
+  isInCart: boolean;
+  addToCart: () => void;
+}) => {
+  return (
+    <SProductButton
+      type="button"
+      // isInCart={isInCart}
+      onClick={() => addToCart()}
+    >
+      <span>Add </span>
+      <svg
+        className="addPlusIcon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        viewBox="0 0 12 12"
+      >
+        <g>
+          <path d="M6 0c.385 0 .702.29.745.663L6.75.75v10.5c0 .414-.336.75-.75.75-.385 0-.702-.29-.745-.663l-.005-.087V.75C5.25.336 5.586 0 6 0z"></path>
+          <path d="M11.25 5.25c.414 0 .75.336.75.75 0 .385-.29.702-.663.745l-.087.005H.75C.336 6.75 0 6.414 0 6c0-.385.29-.702.663-.745L.75 5.25h10.5z"></path>
+        </g>
+      </svg>
+    </SProductButton>
+  );
+};
 
+const ButtonCounter = ({
+  count,
+  addToCart,
+  removeFromCart,
+}: {
+  count: number;
+  addToCart: () => void;
+  removeFromCart: () => void;
+}) => {
+  return (
+    <SButtonCounter>
+      <SIconWrapper onClick={() => removeFromCart()}>
+        <IconMinus />
+      </SIconWrapper>
+      <SProductCount>{count}</SProductCount>
+      <SIconWrapper onClick={() => addToCart()}>
+        <IconPlus />
+      </SIconWrapper>
+    </SButtonCounter>
+  );
+};
 export default function ProductSection({
   category_id,
   category_name,
   product_count,
   products,
 }: ProductsSectionProps): ReactElement {
+  const { addToCart, cart, removeFromCart } = useApp();
+
   return (
     <SProductSection>
       <SProductSectionHeader>
@@ -23,55 +77,62 @@ export default function ProductSection({
         </Link>
       </SProductSectionHeader>
       <SProductGrid>
-        {products.map((product) => (
-          <SProductGridItem key={product.id}>
-            <Link
-              key={product.id}
-              href={`/product/details/?id=${product.id}`}
-              passHref
-            >
-              <a>
-                <SProductImage
-                  src={product.image}
-                  alt={product.name}
-                  srcSet={product.image}
-                />
-              </a>
-            </Link>
-            <SProductBody>
+        {products.map((product) => {
+          const onlyAboveProduct = cart.filter(
+            (item) => item.id === product.id,
+          );
+          const isInCart = !!onlyAboveProduct.length;
+          const quantity = onlyAboveProduct.length;
+          const handleAddToCart = () => () => {
+            addToCart(product);
+          };
+          return (
+            <SProductGridItem key={product.id}>
               <Link
                 key={product.id}
                 href={`/product/details/?id=${product.id}`}
                 passHref
               >
-                <a href="">
-                  <h2>{product.name}</h2>
+                <a>
+                  <SProductImage
+                    src={product.image}
+                    alt={product.name}
+                    srcSet={product.image}
+                  />
                 </a>
               </Link>
-              <small>{product.base_qty}</small>
-              <SProductPrice>
-                <div>
-                  <div>₹{product.base_cost}</div>
-                </div>
-                <SProductButton type="button">
-                  <span>Add </span>
-                  <svg
-                    className="addPlusIcon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                  >
-                    <g>
-                      <path d="M6 0c.385 0 .702.29.745.663L6.75.75v10.5c0 .414-.336.75-.75.75-.385 0-.702-.29-.745-.663l-.005-.087V.75C5.25.336 5.586 0 6 0z"></path>
-                      <path d="M11.25 5.25c.414 0 .75.336.75.75 0 .385-.29.702-.663.745l-.087.005H.75C.336 6.75 0 6.414 0 6c0-.385.29-.702.663-.745L.75 5.25h10.5z"></path>
-                    </g>
-                  </svg>
-                </SProductButton>
-              </SProductPrice>
-            </SProductBody>
-          </SProductGridItem>
-        ))}
+              <SProductBody>
+                <Link
+                  key={product.id}
+                  href={`/product/details/?id=${product.id}`}
+                  passHref
+                >
+                  <a href="">
+                    <h2>{product.name}</h2>
+                  </a>
+                </Link>
+                <small>{product.base_qty}</small>
+                <SProductPrice>
+                  <div>
+                    <div>₹{product.base_cost}</div>
+                  </div>
+                  {isInCart ? (
+                    <ButtonCounter
+                      count={quantity}
+                      addToCart={handleAddToCart()}
+                      removeFromCart={() => removeFromCart(product)}
+                    />
+                  ) : (
+                    <ButtonAdd
+                      isInCart={!!onlyAboveProduct.length}
+                      addToCart={handleAddToCart()}
+                    />
+                  )}
+                </SProductPrice>
+              </SProductBody>
+            </SProductGridItem>
+          );
+        })}
       </SProductGrid>
     </SProductSection>
   );
@@ -79,9 +140,6 @@ export default function ProductSection({
 
 const SProductSection = styled.div`
   padding-top: ${({ theme }) => theme.spacing["6"]};
-  &::last-child {
-    /* padding-bottom: ${({ theme }) => theme.spacing["32"]}; */
-  }
 `;
 const SProductSectionHeader = styled.div`
   top: 70px;
@@ -119,7 +177,6 @@ const SProductGrid = styled.div`
   display: grid;
   margin-top: ${({ theme }) => theme.spacing["4"]};
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
   gap: ${({ theme }) => theme.spacing["4"]};
 `;
 const SProductImage = styled.img`
@@ -178,7 +235,40 @@ const SProductButton = styled.button`
       fill: ${({ theme }) => theme.colors.white};
     }
   }
+  &::focus {
+    outline: none;
+    border: 0;
+    /* box-shadow: ${({ theme }) => theme.shadowOutline}; */
+    border: 2px solid red;
+  }
   & svg {
     fill: #146eb4;
   }
+`;
+const SIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0;
+  flex: 1;
+  cursor: pointer;
+`;
+const SButtonCounter = styled.button`
+  border: 1px solid ${({ theme }) => theme.colors.accent};
+  width: 97.5px;
+  background-color: ${({ theme }) => theme.colors.white};
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25rem;
+`;
+const SProductCount = styled.p`
+  padding: 0.5rem 0;
+  background-color: #146eb41a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.accent};
+  flex: 1;
 `;
