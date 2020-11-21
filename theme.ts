@@ -45,6 +45,7 @@ export interface ITheme {
   };
   fontFamiy: string[];
   maxWidth: string;
+  shadowOutline: string;
 }
 const theme = {
   colors: {
@@ -91,5 +92,6 @@ const theme = {
   },
   fontFamiy: ["Montserrat"],
   maxWidth: "71.25rem",
+  shadowOutline: "0 0 0 1px transparent",
 };
 export default theme;

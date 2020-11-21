@@ -59,3 +59,40 @@ export const IconOrders = () => (
     </g>
   </svg>
 );
+export const IconMinus = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="2"
+      viewBox="0 0 12 2"
+    >
+      <line
+        x2="10"
+        y1="1"
+        y2="1"
+        fill="none"
+        stroke="#146EB4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.7"
+        transform="translate(1)"
+      ></line>
+    </svg>
+  );
+};
+export const IconPlus = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={12}
+      height={12}
+      viewBox="0 0 12 12"
+    >
+      <g fill="#146EB4">
+        <path d="M6 0a.75.75 0 01.745.663L6.75.75v10.5a.75.75 0 01-1.495.087l-.005-.087V.75A.75.75 0 016 0z" />
+        <path d="M11.25 5.25a.75.75 0 01.087 1.495l-.087.005H.75a.75.75 0 01-.087-1.495L.75 5.25h10.5z" />
+      </g>
+    </svg>
+  );
+};
