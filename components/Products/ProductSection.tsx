@@ -66,7 +66,7 @@ export default function ProductSection({
       <SProductSectionHeader>
         <div>
           <h2>{category_name}</h2>
-          <p>{product_count}</p>
+          <SBadge>{product_count}</SBadge>
         </div>
         <Link href={`/producuts/?cat=${category_id}`}>
           <a>See All</a>
@@ -76,9 +76,8 @@ export default function ProductSection({
         {products.map((product) => {
           const onlyAboveProduct = cart.filter(
             (item) => item.id === product.id,
-          );
-          const isInCart = !!onlyAboveProduct.length;
-          const quantity = onlyAboveProduct.length;
+          )[0];
+          const isInCart = !!onlyAboveProduct;
           const handleAddToCart = () => () => {
             addToCart(product);
           };
@@ -114,13 +113,13 @@ export default function ProductSection({
                   </div>
                   {isInCart ? (
                     <ButtonCounter
-                      count={quantity}
+                      count={onlyAboveProduct.count}
                       addToCart={handleAddToCart()}
                       removeFromCart={() => removeFromCart(product)}
                     />
                   ) : (
                     <ButtonAdd
-                      isInCart={!!onlyAboveProduct.length}
+                      isInCart={!!onlyAboveProduct}
                       addToCart={handleAddToCart()}
                     />
                   )}
@@ -237,6 +236,16 @@ const SButtonAdd = styled.button`
   & svg {
     fill: #146eb4;
   }
+`;
+
+export const SBadge = styled.p`
+  padding: 0.25rem 0.5rem;
+  background-color: #146eb4;
+  font-weight: bold;
+  margin: 0 0.5rem;
+  color: #fff;
+  border-radius: 0.25rem;
+  font-weight: 500;
 `;
 const SIconWrapper = styled.div`
   display: flex;
