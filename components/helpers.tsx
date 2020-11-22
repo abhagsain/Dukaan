@@ -1,3 +1,4 @@
+import styled from "styled-components";
 export const IconHome = () => (
   <svg
     width="24"
@@ -96,3 +97,10 @@ export const IconPlus = () => {
     </svg>
   );
 };
+export const OuterContainer = styled.div`
+  padding: 0 1rem;
+  width: 100%;
+  margin: 0 auto;
+  max-width: ${({ theme }) => theme.maxWidth};
+  margin: 0 auto;
+`;

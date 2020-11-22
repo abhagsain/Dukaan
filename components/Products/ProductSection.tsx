@@ -3,6 +3,7 @@ import React, { Fragment, ReactElement } from "react";
 import styled from "styled-components";
 import { useApp } from "../../context/AppContext";
 import { IProduct, ITopProducts } from "../../types";
+import ButtonCounter from "../Button/ButtonCounter";
 import { IconMinus, IconPlus } from "../helpers";
 
 interface ProductsSectionProps extends ITopProducts {}
@@ -32,27 +33,6 @@ const ButtonAdd = ({
   );
 };
 
-const ButtonCounter = ({
-  count,
-  addToCart,
-  removeFromCart,
-}: {
-  count: number;
-  addToCart: () => void;
-  removeFromCart: () => void;
-}) => {
-  return (
-    <SButtonCounter className="button-counter">
-      <SIconWrapper onClick={() => removeFromCart()}>
-        <IconMinus />
-      </SIconWrapper>
-      <SProductCount>{count}</SProductCount>
-      <SIconWrapper onClick={() => addToCart()}>
-        <IconPlus />
-      </SIconWrapper>
-    </SButtonCounter>
-  );
-};
 export default function ProductSection({
   category_id,
   category_name,
@@ -66,7 +46,7 @@ export default function ProductSection({
       <SProductSectionHeader>
         <div>
           <h2>{category_name}</h2>
-          <p>{product_count}</p>
+          <SBadge>{product_count}</SBadge>
         </div>
         <Link href={`/producuts/?cat=${category_id}`}>
           <a>See All</a>
@@ -76,9 +56,8 @@ export default function ProductSection({
         {products.map((product) => {
           const onlyAboveProduct = cart.filter(
             (item) => item.id === product.id,
-          );
-          const isInCart = !!onlyAboveProduct.length;
-          const quantity = onlyAboveProduct.length;
+          )[0];
+          const isInCart = !!onlyAboveProduct;
           const handleAddToCart = () => () => {
             addToCart(product);
           };
@@ -114,13 +93,13 @@ export default function ProductSection({
                   </div>
                   {isInCart ? (
                     <ButtonCounter
-                      count={quantity}
+                      count={onlyAboveProduct.count}
                       addToCart={handleAddToCart()}
                       removeFromCart={() => removeFromCart(product)}
                     />
                   ) : (
                     <ButtonAdd
-                      isInCart={!!onlyAboveProduct.length}
+                      isInCart={!!onlyAboveProduct}
                       addToCart={handleAddToCart()}
                     />
                   )}
@@ -238,30 +217,13 @@ const SButtonAdd = styled.button`
     fill: #146eb4;
   }
 `;
-const SIconWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 0;
-  flex: 1;
-  cursor: pointer;
-`;
-const SButtonCounter = styled.div`
-  border: 1px solid ${({ theme }) => theme.colors.accent};
-  width: 97.5px;
-  background-color: ${({ theme }) => theme.colors.white};
-  display: flex;
-  padding: 0;
-  justify-content: center;
-  align-items: center;
+
+export const SBadge = styled.p`
+  padding: 0.25rem 0.5rem;
+  background-color: #146eb4;
+  font-weight: bold;
+  margin: 0 0.5rem;
+  color: #fff;
   border-radius: 0.25rem;
-`;
-const SProductCount = styled.p`
-  padding: 0.4rem 0;
-  background-color: #146eb41a;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${({ theme }) => theme.colors.accent};
-  flex: 1;
+  font-weight: 500;
 `;

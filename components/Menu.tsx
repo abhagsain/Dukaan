@@ -22,7 +22,7 @@ export default function Menu({}: Props): ReactElement {
             <SMenuItem>Categories</SMenuItem>
           </SMenuContainer>
         </Link>
-        <Link href="/" passHref>
+        <Link href="/cart" passHref>
           <SMenuContainer>
             <IconBag />
             <SMenuItem>Bag {cart.length && cart.length}</SMenuItem>
