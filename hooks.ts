@@ -38,7 +38,7 @@ export function useCart() {
       setCart(updatedCart);
     }
   };
-  const removeFromCart = (product: ICartProduct) => {
+  const removeFromCart = (product: IProduct) => {
     const clonedCart: ICartProduct[] = clone<ICartProduct[]>(cart);
     // Find if the product already exists
     const currentFoundItemIndex = clonedCart.findIndex(

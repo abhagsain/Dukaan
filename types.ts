@@ -32,3 +32,6 @@ export interface ITopProducts {
   product_count: number;
   products: IProduct[];
 }
+export interface ICartProduct extends IProduct {
+  count: number;
+}

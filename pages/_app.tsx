@@ -1,11 +1,10 @@
-import "../styles/globals.css";
 import { AppProps } from "next/app";
-import { ThemeProvider } from "styled-components";
-import theme from "../theme";
-import { AppContext } from "../context/AppContext";
 import { useState } from "react";
-import { IProduct } from "../types";
+import { ThemeProvider } from "styled-components";
+import { AppContext } from "../context/AppContext";
 import { useCart } from "../hooks";
+import "../styles/globals.css";
+import theme from "../theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { cart, addToCart, removeFromCart } = useCart();

@@ -8,6 +8,7 @@ import { ITopCategories, ITopProducts } from "../types";
 import { getData } from "../utils";
 import { ProductSection } from "../components/Products";
 import { useApp } from "../context/AppContext";
+import { OuterContainer } from "../components/helpers";
 
 type HomeProps = IStaticProps;
 interface IStaticProps {
@@ -44,13 +45,7 @@ export const getStaticProps: GetStaticProps<IStaticProps> = async () => {
   const data = getData();
   return { props: data };
 };
-const OuterContainer = styled.div`
-  padding: 0 1rem;
-  width: 100%;
-  margin: 0 auto;
-  max-width: ${({ theme }) => theme.maxWidth};
-  margin: 0 auto;
-`;
+
 export const SectionHeading = styled.h2`
   font-size: ${({ theme }) => theme.fontSize.xl};
   font-weight: bold;

@@ -64,7 +64,7 @@ const SSearchInput = styled.input`
   line-height: normal !important;
   border: none;
   margin: 0 8px 0 0;
-  box-shadow: ${({ theme }) => theme.shadowOutline};
+  box-shadow: ${({ theme }) => theme.outlineNone};
   transition: all 0.2s;
   &:focus {
     /* border: 2px solid ${({ theme }) => theme.colors.gray}; */
