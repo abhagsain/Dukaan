@@ -11,10 +11,6 @@ function ProductSectionHeader({
   product_count,
   category_id,
 }: ProductSectionHeaderProps) {
-  console.log(
-    "🚀 ~ file: ProductSectionHeader.tsx ~ line 14 ~ category_id",
-    category_id,
-  );
   return (
     <SProductSectionHeader>
       <div>
