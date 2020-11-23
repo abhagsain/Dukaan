@@ -5,19 +5,27 @@ interface Props {
   count: number;
   addToCart: () => void;
   removeFromCart: () => void;
+  buttonLarge?: boolean;
 }
+// export function ButtonCounterLarge({
+//   count,
+//   addToCart,
+//   removeFromCart,
+// }: Props){
 
+// }
 export default function ButtonCounter({
   count,
   addToCart,
   removeFromCart,
+  buttonLarge,
 }: Props): ReactElement {
   return (
-    <SButtonCounter className="button-counter">
+    <SButtonCounter buttonLarge={!!buttonLarge}>
       <SIconWrapper onClick={() => removeFromCart()}>
         <IconMinus />
       </SIconWrapper>
-      <SProductCount>{count}</SProductCount>
+      <SProductCount buttonLarge={!!buttonLarge}>{count}</SProductCount>
       <SIconWrapper onClick={() => addToCart()}>
         <IconPlus />
       </SIconWrapper>
@@ -25,30 +33,36 @@ export default function ButtonCounter({
   );
 }
 
-const SButtonCounter = styled.div`
+const SButtonCounter = styled.div<{ buttonLarge: boolean }>`
   border: 1px solid ${({ theme }) => theme.colors.accent};
-  width: 97.5px;
+  width: ${({ buttonLarge }) => (buttonLarge ? "100%" : "97.5px")};
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
   padding: 0;
   justify-content: center;
   align-items: center;
-  border-radius: 0.25rem;
+  border-radius: ${({ buttonLarge }) => (buttonLarge ? "0.625rem" : ".25rem")};
 `;
-const SProductCount = styled.p`
-  padding: 0.4rem 0;
+const SProductCount = styled.p<{ buttonLarge: boolean }>`
+  padding: ${({ buttonLarge }) => (buttonLarge ? "1rem 0 " : "0.4rem 0")};
   background-color: #146eb41a;
   display: flex;
   justify-content: center;
   align-items: center;
   color: ${({ theme }) => theme.colors.accent};
+  height: 100%;
   flex: 1;
 `;
 const SIconWrapper = styled.div`
   display: flex;
   align-items: center;
+  height: 100%;
   justify-content: center;
   padding: 0.5rem 0;
   flex: 1;
   cursor: pointer;
+  /* transition: all 0.3s;
+  &:hover {
+    background-color: rgba(20, 110, 180, 0.1);
+  } */
 `;

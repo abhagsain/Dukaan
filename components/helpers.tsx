@@ -104,3 +104,49 @@ export const OuterContainer = styled.div`
   max-width: ${({ theme }) => theme.maxWidth};
   margin: 0 auto;
 `;
+export const LeftArrow = () => (
+  <svg
+    className="prefix__mr-1 prefix__mt-md-1 prefix__ml-md-0"
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+  >
+    <g
+      fill="none"
+      fillRule="evenodd"
+      stroke="#353535"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+    >
+      <path d="M10.02 3.225l-8.36 8.55 8.36 8.55M1.66 11.775h21.12" />
+    </g>
+  </svg>
+);
+export const IconCategory = () => (
+  <svg width={24} height={24} viewBox="0 0 24 24" className="details-icon">
+    <g
+      fill="none"
+      fillRule="evenodd"
+      strokeLinejoin="round"
+      strokeWidth={1.8}
+      transform="translate(3.004 3)"
+    >
+      <rect width={6.991} height={6.991} rx={0.5} />
+      <rect width={6.991} height={6.991} x={10.983} rx={0.5} />
+      <g transform="translate(0 11.033)">
+        <rect width={6.991} height={6.991} rx={0.5} />
+        <rect width={6.991} height={6.991} x={10.983} rx={0.5} />
+      </g>
+    </g>
+  </svg>
+);
+export const IconCart = () => (
+  <svg width={24} height={24} viewBox="0 0 24 24" className="details-icon">
+    <g strokeWidth={0}>
+      <path d="M18 1.15H6a.849.849 0 00-.68.34l-3 4a.852.852 0 00-.17.51v14A2.85 2.85 0 005 22.85h14A2.85 2.85 0 0021.85 20V6a.852.852 0 00-.17-.51l-3-4a.849.849 0 00-.68-.34zm-.425 1.7l2.575 3.433V20A1.15 1.15 0 0119 21.15H5l-.125-.007A1.15 1.15 0 013.85 20V6.282L6.424 2.85h11.151z" />
+      <path d="M21 5.15a.85.85 0 01.107 1.693L21 6.85H3a.85.85 0 01-.107-1.693L3 5.15h18zm-5 4c.47 0 .85.38.85.85a4.85 4.85 0 11-9.7 0 .85.85 0 111.7 0 3.15 3.15 0 106.3 0c0-.47.38-.85.85-.85z" />
+    </g>
+  </svg>
+);

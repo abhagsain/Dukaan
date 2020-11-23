@@ -29,7 +29,6 @@ export function useCart() {
     if (currentFoundProduct) {
       // If already there increase count
       currentFoundProduct.count += 1;
-      console.log("🚀 ~ file: hooks.ts ~ line 30 ~ addToCart ~ cloned", cloned);
       setCart(cloned);
     } else {
       // Otherwise put count = 1;

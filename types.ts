@@ -1,5 +1,4 @@
 export interface IProduct {
-  is_hidden: boolean;
   id: number;
   base_cost: number;
   original_cost: number;

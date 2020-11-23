@@ -11,7 +11,7 @@ export default function CategoryList({ categories }: Props): ReactElement {
   return (
     <CategoryContainer>
       {categories.map((category) => (
-        <Link href={`/products/?cat=${category.id}`} key={category.id} passHref>
+        <Link href={`/details/${category.id}`} key={category.id} passHref>
           <CategoryItem>
             <CategoryImage
               src={category.image}

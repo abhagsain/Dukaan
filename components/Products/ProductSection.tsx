@@ -3,35 +3,11 @@ import React, { Fragment, ReactElement } from "react";
 import styled from "styled-components";
 import { useApp } from "../../context/AppContext";
 import { IProduct, ITopProducts } from "../../types";
+import ButtonAdd from "../Button/ButtonAdd";
 import ButtonCounter from "../Button/ButtonCounter";
 import { IconMinus, IconPlus } from "../helpers";
 
 interface ProductsSectionProps extends ITopProducts {}
-const ButtonAdd = ({
-  isInCart,
-  addToCart,
-}: {
-  isInCart: boolean;
-  addToCart: () => void;
-}) => {
-  return (
-    <SButtonAdd type="button" onClick={() => addToCart()}>
-      <span>Add </span>
-      <svg
-        className="addPlusIcon"
-        xmlns="http://www.w3.org/2000/svg"
-        width="12"
-        height="12"
-        viewBox="0 0 12 12"
-      >
-        <g>
-          <path d="M6 0c.385 0 .702.29.745.663L6.75.75v10.5c0 .414-.336.75-.75.75-.385 0-.702-.29-.745-.663l-.005-.087V.75C5.25.336 5.586 0 6 0z"></path>
-          <path d="M11.25 5.25c.414 0 .75.336.75.75 0 .385-.29.702-.663.745l-.087.005H.75C.336 6.75 0 6.414 0 6c0-.385.29-.702.663-.745L.75 5.25h10.5z"></path>
-        </g>
-      </svg>
-    </SButtonAdd>
-  );
-};
 
 export default function ProductSection({
   category_id,
@@ -40,7 +16,7 @@ export default function ProductSection({
   products,
 }: ProductsSectionProps): ReactElement {
   const { addToCart, cart, removeFromCart } = useApp();
-
+  // products.map(el => el.);
   return (
     <SProductSection>
       <SProductSectionHeader>
@@ -48,7 +24,7 @@ export default function ProductSection({
           <h2>{category_name}</h2>
           <SBadge>{product_count}</SBadge>
         </div>
-        <Link href={`/producuts/?cat=${category_id}`}>
+        <Link href={`/details/${category_id}}`}>
           <a>See All</a>
         </Link>
       </SProductSectionHeader>
@@ -65,8 +41,7 @@ export default function ProductSection({
             <SProductGridItem key={product.id}>
               <Link
                 key={product.id}
-                href={`/product/details/?id=${product.id}`}
-                passHref
+                href={`/details/${category_id}/${product.id}`}
               >
                 <a>
                   <SProductImage
@@ -79,10 +54,9 @@ export default function ProductSection({
               <SProductBody>
                 <Link
                   key={product.id}
-                  href={`/product/details/?id=${product.id}`}
-                  passHref
+                  href={`/details/${category_id}/${product.id}`}
                 >
-                  <a href="">
+                  <a>
                     <h2>{product.name}</h2>
                   </a>
                 </Link>
@@ -188,36 +162,6 @@ const SProductPrice = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-const SButtonAdd = styled.button`
-  border: 1px solid ${({ theme }) => theme.colors.accent};
-  display: flex;
-  justify-content: space-between;
-  background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 0.25rem;
-  & span {
-    margin-right: ${({ theme }) => theme.spacing["2"]};
-  }
-  align-items: center;
-  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-  cursor: pointer;
-  color: ${({ theme }) => theme.colors.accent};
-  transition: all 0.2s;
-  &:hover {
-    color: ${({ theme }) => theme.colors.white};
-    background-color: ${({ theme }) => theme.colors.accent};
-    svg {
-      fill: ${({ theme }) => theme.colors.white};
-    }
-  }
-  &:focus {
-    outline: none;
-    border: 1px solid ${({ theme }) => theme.colors.accent};
-  }
-  & svg {
-    fill: #146eb4;
-  }
-`;
-
 export const SBadge = styled.p`
   padding: 0.25rem 0.5rem;
   background-color: #146eb4;
