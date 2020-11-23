@@ -4,6 +4,7 @@ import React, { ReactElement } from "react";
 import styled from "styled-components";
 import { OuterContainer } from "../../../components/helpers";
 import Menu from "../../../components/Menu";
+import NotFound from "../../../components/NotFound";
 import ProductList from "../../../components/Products/ProductList";
 import SearchBar from "../../../components/SearchBar";
 import { SProductSectionHeader } from "../../../styles/StyledElements";
@@ -15,6 +16,9 @@ interface Props {
 }
 
 export default function Category({ category }: Props): ReactElement {
+  if (!category) {
+    return <NotFound>Not Found</NotFound>;
+  }
   return (
     <OuterContainer>
       <SearchBar />
@@ -44,10 +48,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     if (context && "params" in context && "categoryId" in context.params!) {
       const categoryId = context.params!.categoryId! as string;
       const category = getCategory(categoryId);
-      console.log(
-        "🚀 ~ file: index.tsx ~ line 25 ~ getServerSideProps ~ category",
-        category,
-      );
+      if (!category) {
+        return {
+          props: {},
+        };
+      }
       return {
         props: { category },
       };
