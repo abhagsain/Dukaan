@@ -1,5 +1,5 @@
 import data from "./pages/api/data.json";
-import { INotFound, IProduct } from "./types";
+import { IAllProducts, ICategory, INotFound, IProduct } from "./types";
 export function getData() {
   const { top_categories, top_products } = data;
   return { top_categories, top_products };
@@ -59,8 +59,11 @@ export function getTopProductsIds(): StaticPropsReturn[] {
   });
   return result;
 }
-export function getCategory(category_id: string) {
-  const foundCategory = data.all_products.find(
+// export function getProductsOfCategory(categoryId: string){
+
+// }
+export function getCategory(category_id: string): IAllProducts | undefined {
+  const foundCategory = data.top_products.find(
     (product) => product.category_id === Number(category_id),
   );
   if (!foundCategory) {

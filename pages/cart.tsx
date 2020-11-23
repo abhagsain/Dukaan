@@ -6,8 +6,8 @@ import LinkMain from "../components/Button/LinkMain";
 import EmptyBag from "../components/EmptyBag";
 import { OuterContainer } from "../components/helpers";
 import Menu from "../components/Menu";
-import { SBadge } from "../components/Products/ProductSection";
 import { useApp } from "../context/AppContext";
+import { SBadge } from "../styles/StyledElements";
 
 interface Props {}
 

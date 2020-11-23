@@ -182,3 +182,91 @@ export const SButtonAdd = styled.button`
     fill: #146eb4;
   }
 `;
+
+export const SProductSection = styled.div`
+  padding-top: ${({ theme }) => theme.spacing["6"]};
+`;
+export const SProductSectionHeader = styled.div<{ hasBackground?: boolean }>`
+  top: 70px;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${({ theme }) => `${theme.spacing["4"]} ${theme.spacing["4"]}`};
+  border: 1px solid
+    ${({ theme, hasBackground }) =>
+      !hasBackground ? theme.colors.white : theme.colors.gray};
+  position: sticky;
+  background-color: ${({ theme, hasBackground }) =>
+    !hasBackground ? theme.colors.white : theme.colors.gray1};
+  & div {
+    display: flex;
+  }
+  & div h2 {
+    font-size: ${({ theme }) => theme.fontSize.lg};
+    font-weight: bold;
+  }
+  & div p {
+    padding: ${({ theme }) => `${theme.spacing["1"]} ${theme.spacing["2"]}`};
+    background-color: ${({ theme }) => theme.colors.accent};
+    font-weight: bold;
+    margin: ${({ theme }) => `0 ${theme.spacing["2"]}`};
+    color: ${({ theme }) => theme.colors.white};
+    border-radius: 0.25rem;
+    font-weight: 500;
+  }
+  & a {
+    color: ${({ theme }) => theme.colors.accent};
+    font-weight: 500;
+  }
+`;
+export const SProductGrid = styled.div`
+  display: grid;
+  margin-top: ${({ theme }) => theme.spacing["4"]};
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: ${({ theme }) => theme.spacing["4"]};
+`;
+export const SProductImage = styled.img`
+  width: 100%;
+  border-radius: 0.5rem;
+  transition: all 0.5s;
+  &:hover {
+    opacity: 0.75;
+  }
+`;
+export const SProductGridItem = styled.div`
+  width: 100%;
+`;
+export const SProductBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  & h2 {
+    font-size: ${({ theme }) => theme.fontSize.base};
+    font-weight: 500;
+    transition: opacity 0.2s;
+    padding-top: ${({ theme }) => theme.spacing["4"]};
+  }
+  & h2:hover {
+    opacity: 0.75;
+  }
+  & small {
+    margin-top: ${({ theme }) => theme.spacing["1"]};
+  }
+  padding-bottom: ${({ theme }) => theme.spacing["4"]};
+`;
+export const SProductPrice = styled.div`
+  margin-top: ${({ theme }) => theme.spacing["2"]};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+export const SBadge = styled.p`
+  padding: 0.25rem 0.5rem;
+  background-color: #146eb4;
+  font-weight: bold;
+  margin: 0 0.5rem;
+  color: #fff;
+  border-radius: 0.25rem;
+  font-weight: 500;
+`;

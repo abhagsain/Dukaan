@@ -175,8 +175,8 @@ export const getStaticProps: GetStaticProps<ProductDetailsProps> = async (
     if (typeof product === "undefined") {
       return { props: { product: { message: "Not Found" } } };
     }
-    console.log("\n\n\nline 180 -> chala", categoryId, productId);
-    return { props: { product, lahsan: "ruko" } };
+    // console.log("\n\n\nline 180 -> chala", categoryId, productId);
+    return { props: { product } };
   }
   console.log("\n\n\nline 183 -> chala");
   return { props: { product: { message: "Not Found" } } };

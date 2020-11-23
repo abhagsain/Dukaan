@@ -14,7 +14,6 @@ export interface INotFound {
 export interface ProductResponse {
   product: IProduct;
 }
-export interface IAllProducts extends IProduct {}
 export interface INotFound {
   message: string;
 }
@@ -31,6 +30,8 @@ export interface ITopProducts {
   product_count: number;
   products: IProduct[];
 }
+export interface IAllProducts extends ITopProducts {}
+
 export interface ICartProduct extends IProduct {
   count: number;
 }
