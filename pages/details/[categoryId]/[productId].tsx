@@ -65,9 +65,6 @@ const ButtonAddToBag = styled.button`
     border: 1px solid ${({ theme }) => theme.colors.accent};
   }
 `;
-function isProduct(arg: any): arg is IProduct {
-  return arg && arg.id && typeof arg.id === "number";
-}
 function isOfType<T>(arg: any, key: any, type: any): arg is T {
   return arg && arg[key] && typeof arg[key] === type;
 }
@@ -79,6 +76,13 @@ export default function ProductDetails(
     return <OuterContainer>Not Found</OuterContainer>;
   }
   const product = props.product;
+  // console.log("🚀 ~ file: [productId].tsx ~ line 79 ~ product", props, product);
+  if (!product) {
+    console.log(
+      "🚀 ~ file: [productId].tsx ~ line 81 ~ product",
+      JSON.stringify(props, null, 2),
+    );
+  }
   let percentage = 0;
   try {
     percentage = Math.round(
@@ -86,6 +90,7 @@ export default function ProductDetails(
         100,
     );
   } catch (error) {
+    console.log(product);
     console.log("🚀 ~ file: [productId].tsx ~ line 59 ~ error", error);
   }
   const foundProductInCart = cart.find((prod) => prod.id === product.id);
@@ -163,14 +168,17 @@ export const ButtonWrapper = styled.div`
 export const getStaticProps: GetStaticProps<ProductDetailsProps> = async (
   ctx: GetStaticPropsContext,
 ) => {
-  // details/:categoryId/:productId
-  console.log("🚀 ~ file: details.tsx ~ line 89 ~ ctx.params", ctx.params);
   const categoryId = ctx.params!.categoryId;
   const productId = ctx.params!.productId;
   if (categoryId && productId) {
-    const product = getProduct(+categoryId, +productId);
-    return { props: { product } };
+    const product = getProduct(Number(categoryId), Number(productId));
+    if (typeof product === "undefined") {
+      return { props: { product: { message: "Not Found" } } };
+    }
+    console.log("\n\n\nline 180 -> chala", categoryId, productId);
+    return { props: { product, lahsan: "ruko" } };
   }
+  console.log("\n\n\nline 183 -> chala");
   return { props: { product: { message: "Not Found" } } };
 };
 export const getStaticPaths: GetStaticPaths<{
@@ -178,7 +186,7 @@ export const getStaticPaths: GetStaticPaths<{
   productId: string;
 }> = async () => {
   // Generating static files for all the top products
-  const staticProducts = getTopProductsIds();
+  const staticProducts = getTopProductsIds().slice(0, 1);
   return {
     fallback: true,
     paths: staticProducts,

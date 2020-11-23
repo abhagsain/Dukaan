@@ -41,18 +41,22 @@ export function getTopProductsIds(): StaticPropsReturn[] {
   const result: StaticPropsReturn[] = [];
   data.top_products.forEach((topProduct) => {
     topProduct.products.forEach((product) => {
-      result.push({
-        params: {
-          categoryId: topProduct.category_id.toString(),
-          productId: product.id.toString(),
-        },
-      });
+      if (product) {
+        result.push({
+          params: {
+            categoryId: topProduct.category_id.toString(),
+            productId: product.id.toString(),
+          },
+        });
+      }
+      // else {
+      //   console.log(
+      //     "🚀 ~ file: utils.ts ~ line 54 ~ topProduct.products.forEach ~ product",
+      //     product,
+      //   );
+      // }
     });
   });
-  console.log(
-    "🚀 ~ file: utils.ts ~ line 42 ~ getStaticProducts ~ result",
-    result,
-  );
   return result;
 }
 export function getCategory(category_id: string) {
