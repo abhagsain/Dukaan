@@ -15,6 +15,7 @@ export default function ProductSection({
   return (
     <SProductSection>
       <ProductSectionHeader
+        hasBackground
         category_id={category_id}
         category_name={category_name}
         product_count={product_count}

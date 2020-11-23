@@ -7,6 +7,9 @@ import { IconBag, IconCategories, IconHome, IconOrders } from "./helpers";
 interface Props {}
 export default function Menu({}: Props): ReactElement {
   const { cart } = useApp();
+  const totalItems = cart.reduce((acc, curr) => {
+    return acc + curr.count;
+  }, 0);
   return (
     <SFooter>
       <SFooterWrapper>
@@ -25,7 +28,7 @@ export default function Menu({}: Props): ReactElement {
         <Link href="/cart" passHref>
           <SMenuContainer>
             <IconBag />
-            <SMenuItem>Bag {cart.length && cart.length}</SMenuItem>
+            <SMenuItem>Bag {totalItems && totalItems}</SMenuItem>
           </SMenuContainer>
         </Link>
         <Link href="/" passHref>

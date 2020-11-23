@@ -5,14 +5,16 @@ interface ProductSectionHeaderProps {
   category_name: string;
   product_count: number;
   category_id: number;
+  hasBackground?: boolean;
 }
 function ProductSectionHeader({
   category_name,
   product_count,
   category_id,
+  hasBackground,
 }: ProductSectionHeaderProps) {
   return (
-    <SProductSectionHeader>
+    <SProductSectionHeader hasBackground={!!hasBackground}>
       <div>
         <h2>{category_name}</h2>
         <SBadge>{product_count}</SBadge>

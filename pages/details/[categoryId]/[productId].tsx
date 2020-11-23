@@ -35,7 +35,7 @@ import {
   SQuantity,
 } from "../../../styles/StyledElements";
 import { INotFound, IProduct } from "../../../types";
-import { getProduct, getTopProductsIds } from "../../../utils";
+import { getPercentageDecreased, getProduct, getTopProductsIds } from "../../../utils";
 
 type ReturnData = IProduct | INotFound;
 interface ProductDetailsProps {
@@ -89,10 +89,11 @@ export default function ProductDetails(
     );
   }
   let percentage = 0;
+  
   try {
-    percentage = Math.round(
-      ((product.original_cost - product.base_cost) / product.original_cost) *
-        100,
+    percentage = getPercentageDecreased(
+      product.original_cost,
+      product.base_cost,
     );
   } catch (error) {
     console.log(product);

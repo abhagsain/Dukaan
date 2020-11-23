@@ -71,3 +71,9 @@ export function getCategory(category_id: string): IAllProducts | undefined {
   }
   return foundCategory;
 }
+export function getPercentageDecreased(
+  originalPrice: number,
+  basePrice: number,
+) {
+  return Math.round(((originalPrice - basePrice) / originalPrice) * 100);
+}
