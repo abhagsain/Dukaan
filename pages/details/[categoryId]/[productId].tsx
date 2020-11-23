@@ -1,4 +1,9 @@
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
+import {
+  GetServerSidePropsContext,
+  GetStaticPaths,
+  GetStaticProps,
+  GetStaticPropsContext,
+} from "next";
 import Link from "next/link";
 import React, { ReactElement } from "react";
 import styled from "styled-components";
@@ -165,30 +170,46 @@ export default function ProductDetails(
 export const ButtonWrapper = styled.div`
   grid-column: 1/1;
 `;
-export const getStaticProps: GetStaticProps<ProductDetailsProps> = async (
-  ctx: GetStaticPropsContext,
+
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext<{ categoryId: string; productId: string }>,
 ) => {
-  const categoryId = ctx.params!.categoryId;
-  const productId = ctx.params!.productId;
+  const categoryId = context.params!.categoryId;
+  const productId = context.params!.productId;
   if (categoryId && productId) {
     const product = getProduct(Number(categoryId), Number(productId));
     if (typeof product === "undefined") {
       return { props: { product: { message: "Not Found" } } };
     }
-    // console.log("\n\n\nline 180 -> chala", categoryId, productId);
     return { props: { product } };
   }
   console.log("\n\n\nline 183 -> chala");
   return { props: { product: { message: "Not Found" } } };
 };
-export const getStaticPaths: GetStaticPaths<{
-  categoryId: string;
-  productId: string;
-}> = async () => {
-  // Generating static files for all the top products
-  const staticProducts = getTopProductsIds().slice(0, 1);
-  return {
-    fallback: true,
-    paths: staticProducts,
-  };
-};
+// export const getStaticProps: GetStaticProps<ProductDetailsProps> = async (
+//   ctx: GetStaticPropsContext,
+// ) => {
+//   const categoryId = ctx.params!.categoryId;
+//   const productId = ctx.params!.productId;
+//   if (categoryId && productId) {
+//     const product = getProduct(Number(categoryId), Number(productId));
+//     if (typeof product === "undefined") {
+//       return { props: { product: { message: "Not Found" } } };
+//     }
+//     // console.log("\n\n\nline 180 -> chala", categoryId, productId);
+//     return { props: { product } };
+//   }
+//   console.log("\n\n\nline 183 -> chala");
+//   return { props: { product: { message: "Not Found" } } };
+// };
+// export const getStaticPaths: GetStaticPaths<{
+//   categoryId: string;
+//   productId: string;
+// }> = async () => {
+//   // Generating static files for all the top products
+//   const staticProducts = getTopProductsIds().slice(0, 1);
+//   return {
+//     fallback: true,
+//     paths: staticProducts,
+//   };
+// };
