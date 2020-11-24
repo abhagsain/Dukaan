@@ -72,7 +72,12 @@ export const SIconBadge = styled.span`
   top: -7px;
 `;
 export const SDetailsGrid = styled.div`
+  display: block;
+  ${({ theme }) =>
+    mediaQueries("sm")(`
+  font-size: ${theme.fontSize["sm"]};
   display: grid;
+  `)}
   gap: ${({ theme }) => theme.spacing["5"]};
   grid-template-columns: repeat(12, 1fr);
   margin-top: ${({ theme }) => theme.spacing["24"]};
@@ -85,15 +90,23 @@ export const SDetailContainer = styled.div`
   margin-top: ${({ theme }) => theme.spacing["4"]};
   display: flex;
   flex-direction: column;
-  margin-left: ${({ theme }) => theme.spacing["10"]};
   & h2 {
-    font-size: ${({ theme }) => theme.fontSize["lg"]};
+    font-size: ${({ theme }) => theme.fontSize["base"]};
+    ${({ theme }) =>
+      mediaQueries("sm")(`
+    font-size: ${theme.fontSize["lg"]};
+  `)}
     margin-bottom: ${({ theme }) => theme.spacing["2"]};
   }
   & #price-container {
     display: flex;
     align-items: center;
   }
+  ${({ theme }) =>
+    mediaQueries("sm")(`
+  margin-left: ${theme.spacing["10"]};
+
+  `)}
 `;
 export const SBaseCost = styled.p`
   font-weight: bold;

@@ -4,6 +4,7 @@ import {
   ICategory,
   INotFound,
   IProduct,
+  IProducutWithCategory,
   ITopCategories,
 } from "./types";
 export function getData() {
@@ -15,7 +16,7 @@ const notFound = { message: "Not Found" };
 export function getProduct(
   categoryId: number,
   productId: number,
-): IProduct | INotFound {
+): IProducutWithCategory | INotFound {
   if (!categoryId && !productId) {
     return notFound;
   }
@@ -32,7 +33,11 @@ export function getProduct(
     if (!foundProduct) {
       return notFound;
     }
-    return foundProduct;
+    return {
+      category_id: foundCategory.category_id,
+      category_name: foundCategory.category_name,
+      product: foundProduct,
+    };
   }
   return notFound;
 }

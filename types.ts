@@ -8,6 +8,11 @@ export interface IProduct {
   category_name?: string;
   description: string;
 }
+export interface IProducutWithCategory {
+  category_id: number;
+  category_name: string;
+  product: IProduct;
+}
 export interface INotFound {
   message: string;
 }

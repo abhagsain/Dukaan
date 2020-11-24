@@ -34,10 +34,14 @@ import {
   SPercentageOff,
   SQuantity,
 } from "../../../styles/StyledElements";
-import { INotFound, IProduct } from "../../../types";
-import { getPercentageDecreased, getProduct, getTopProductsIds } from "../../../utils";
+import { INotFound, IProduct, IProducutWithCategory } from "../../../types";
+import {
+  getPercentageDecreased,
+  getProduct,
+  getTopProductsIds,
+} from "../../../utils";
 
-type ReturnData = IProduct | INotFound;
+type ReturnData = IProducutWithCategory | INotFound;
 interface ProductDetailsProps {
   product: ReturnData;
 }
@@ -80,8 +84,7 @@ export default function ProductDetails(
   if (isOfType<INotFound>(props.product, "message", "string")) {
     return <OuterContainer>Not Found</OuterContainer>;
   }
-  const product = props.product;
-  // console.log("🚀 ~ file: [productId].tsx ~ line 79 ~ product", props, product);
+  const product = props.product.product;
   if (!product) {
     console.log(
       "🚀 ~ file: [productId].tsx ~ line 81 ~ product",
@@ -89,7 +92,7 @@ export default function ProductDetails(
     );
   }
   let percentage = 0;
-  
+
   try {
     percentage = getPercentageDecreased(
       product.original_cost,
@@ -110,7 +113,11 @@ export default function ProductDetails(
                 <span>
                   <LeftArrow />
                 </span>
-                <h2>Spices Or Masala</h2>
+                {props.product.category_name ? (
+                  <h2>{props.product.category_name}</h2>
+                ) : (
+                  <h2>Go Back</h2>
+                )}
               </SGoBackLink>
             </Link>
             <SDetailsRight>
@@ -184,7 +191,6 @@ export const getServerSideProps = async (
     }
     return { props: { product } };
   }
-  console.log("\n\n\nline 183 -> chala");
   return { props: { product: { message: "Not Found" } } };
 };
 // export const getStaticProps: GetStaticProps<ProductDetailsProps> = async (
