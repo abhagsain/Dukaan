@@ -1,3 +1,4 @@
+import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { ReactElement } from "react";
 import styled, { ThemedStyledFunction } from "styled-components";
@@ -5,6 +6,23 @@ import { useApp } from "../context/AppContext";
 import { IconBag, IconCategories, IconHome, IconOrders } from "./helpers";
 
 interface Props {}
+interface CustomLinkProps {
+  href: string;
+  children?: React.ReactNode[];
+}
+// export const CustomLink ({ href, children }: CustomLinkProps): ReactElement => {
+//   const router = useRouter()
+
+//   // let className = children.props.className || ''
+//   let isActive = false
+//   if (router.pathname === href) {
+//     isActive = true;
+//   }
+
+//   if(children)
+//   return <Link href={href}>{React.cloneElement(children, { isActive })}</Link>
+//   return <div>Hey</div>
+// }
 export default function Menu({}: Props): ReactElement {
   const { cart } = useApp();
   const totalItems = cart.reduce((acc, curr) => {

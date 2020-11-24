@@ -104,3 +104,15 @@ export function findProducts(query: string): IProduct[] {
   });
   return foundProducts;
 }
+
+const breakpoints = {
+  sm: "640px",
+  md: "768px",
+  lg: "1024px",
+  xl: "1280px",
+  "2xl": "1536px",
+};
+export const mediaQueries = (key: keyof typeof breakpoints) => {
+  return (style: TemplateStringsArray | String) =>
+    `@media (min-width: ${breakpoints[key]}) { ${style} }`;
+};
