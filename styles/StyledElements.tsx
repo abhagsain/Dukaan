@@ -224,7 +224,7 @@ export const SProductSectionHeader = styled.div<{ hasBackground?: boolean }>`
 export const SProductGrid = styled.div`
   display: grid;
   margin-top: ${({ theme }) => theme.spacing["4"]};
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: ${({ theme }) => theme.spacing["4"]};
 `;
 export const SProductImage = styled.img`
@@ -269,4 +269,7 @@ export const SBadge = styled.p`
   color: #fff;
   border-radius: 0.25rem;
   font-weight: 500;
+`;
+export const SBottomSpacer = styled.div`
+  padding-bottom: ${({ theme }) => theme.spacing["24"]};
 `;

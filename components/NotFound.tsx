@@ -17,14 +17,14 @@ export default function NotFound({ children }: Props): ReactElement {
   );
 }
 const SNotFoundContainer = styled.div`
-  /* height: 50vh; */
+  height: 100vh;
   padding-top: 5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   & h2 {
-    font-size: ${({ theme }) => theme.fontSize["3xl"]};
+    font-size: ${({ theme }) => theme.fontSize["2xl"]};
     font-weight: bold;
   }
 `;

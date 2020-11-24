@@ -1,14 +1,26 @@
-import React, { ReactElement, useState } from "react";
+import { useRouter } from "next/dist/client/router";
+import React, { ReactElement, useEffect, useState } from "react";
 import styled, { ThemeConsumer } from "styled-components";
 
-interface Props {}
+interface Props {
+  initalValue?: string;
+}
 
-export default function SearchBar({}: Props): ReactElement {
-  const [search, setSearch] = useState("");
-  const onButtonClicked = () => {};
-
+export default function SearchBar({ initalValue = "" }: Props): ReactElement {
+  const [search, setSearch] = useState(initalValue);
+  const onButtonClicked = () => {
+    if (search.trim().length) router.push(`/search/?search_query=${search}`);
+  };
+  const router = useRouter();
+  useEffect(() => {
+    if ("search_query" in router.query) {
+      setSearch(router.query.search_query as string);
+    }
+    return () => {};
+  }, [router.query]);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (search.trim().length) router.push(`/search/?search_query=${search}`);
   };
 
   return (
@@ -16,6 +28,7 @@ export default function SearchBar({}: Props): ReactElement {
       <SSearchInput
         type="text"
         name="search_input"
+        autoComplete="off"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         id="search"

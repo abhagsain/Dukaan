@@ -7,7 +7,10 @@ import Menu from "../../../components/Menu";
 import NotFound from "../../../components/NotFound";
 import ProductList from "../../../components/Products/ProductList";
 import SearchBar from "../../../components/SearchBar";
-import { SProductSectionHeader } from "../../../styles/StyledElements";
+import {
+  SBottomSpacer,
+  SProductSectionHeader,
+} from "../../../styles/StyledElements";
 import { IAllProducts } from "../../../types";
 import { getCategory } from "../../../utils";
 
@@ -31,14 +34,12 @@ export default function Category({ category }: Props): ReactElement {
         products={category.products}
         category_id={category.category_id}
       />
-      <ISpacer />
+      <SBottomSpacer />
       <Menu />
     </OuterContainer>
   );
 }
-const ISpacer = styled.div`
-  padding-bottom: ${({ theme }) => theme.spacing["24"]};
-`;
+
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   console.log(
     "🚀 ~ file: index.tsx ~ line 20 ~ getServerSideProps ~ context",

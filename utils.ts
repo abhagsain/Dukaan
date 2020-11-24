@@ -59,9 +59,7 @@ export function getTopProductsIds(): StaticPropsReturn[] {
   });
   return result;
 }
-// export function getProductsOfCategory(categoryId: string){
 
-// }
 export function getCategory(category_id: string): IAllProducts | undefined {
   const foundCategory = data.top_products.find(
     (product) => product.category_id === Number(category_id),
@@ -71,9 +69,29 @@ export function getCategory(category_id: string): IAllProducts | undefined {
   }
   return foundCategory;
 }
+
 export function getPercentageDecreased(
   originalPrice: number,
   basePrice: number,
 ) {
   return Math.round(((originalPrice - basePrice) / originalPrice) * 100);
+}
+/**
+ * Find the products for a give query
+ */
+export function findProducts(query: string): IProduct[] {
+  if (!query.trim().length) {
+    return [];
+  }
+  // Loop over all the products of all categories and check if
+  // their title contains the searched query
+  const foundProducts: IProduct[] = [];
+  data.all_products.forEach((category) => {
+    category.products.forEach((product: IProduct) => {
+      if (product.name.toLowerCase().includes(query.toLowerCase())) {
+        foundProducts.push(product);
+      }
+    });
+  });
+  return foundProducts;
 }
