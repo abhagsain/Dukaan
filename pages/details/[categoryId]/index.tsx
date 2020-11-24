@@ -6,7 +6,7 @@ import { OuterContainer } from "../../../components/helpers";
 import Menu from "../../../components/Menu";
 import NotFound from "../../../components/NotFound";
 import ProductList from "../../../components/Products/ProductList";
-import SearchBar from "../../../components/SearchBar";
+import SearchBar from "../../../components/SearchBar/SearchBar";
 import {
   SBottomSpacer,
   SProductSectionHeader,

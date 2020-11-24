@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, { ThemeProps } from "styled-components";
+import { ITheme } from "../theme";
 export const SDetailNav = styled.nav`
   padding: 1.5rem 0;
   position: fixed;
@@ -272,4 +273,56 @@ export const SBadge = styled.p`
 `;
 export const SBottomSpacer = styled.div`
   padding-bottom: ${({ theme }) => theme.spacing["24"]};
+`;
+export const SContainer = styled.div`
+  max-width: 20rem;
+  margin-top: 3rem;
+`;
+export const SSearchBarContainer = styled.div`
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10000;
+  left: 0;
+  background-color: ${({ theme }) => theme.colors.white};
+  /* max-width: ${({ theme }) => theme.maxWidth}; */
+  margin: 0 auto;
+  & #search-container {
+    display: flex;
+    align-items: center;
+    & #left-arrow {
+      width: 30px;
+      margin-right: 10px;
+    }
+  }
+`;
+export const SCategoryOverlay = styled.div`
+  /* background: rgba(0, 0, 0, 0.5); */
+  background: linear-gradient(
+    to bottom,
+    rgba(2, 0, 36, 0) 0%,
+    rgba(0, 0, 0, 0.4) 80%
+  ) !important;
+  transition: all 0.5s;
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+export const SCategoryLabel = styled.h4`
+  font-size: ${({ theme }) => theme.fontSize.sm};
+  padding-bottom: ${({ theme }) => theme.spacing["4"]};
+  padding-left: ${({ theme }) => theme.spacing["2"]};
+  padding-right: ${({ theme }) => theme.spacing["2"]};
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.white};
+  text-transform: capitalize;
+  white-space: pre-wrap;
 `;

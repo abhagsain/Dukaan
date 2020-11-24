@@ -1,5 +1,11 @@
 import data from "./pages/api/data.json";
-import { IAllProducts, ICategory, INotFound, IProduct } from "./types";
+import {
+  IAllProducts,
+  ICategory,
+  INotFound,
+  IProduct,
+  ITopCategories,
+} from "./types";
 export function getData() {
   const { top_categories, top_products } = data;
   return { top_categories, top_products };
@@ -70,6 +76,9 @@ export function getCategory(category_id: string): IAllProducts | undefined {
   return foundCategory;
 }
 
+export function getCategoryList(): ITopCategories[] {
+  return data.top_categories;
+}
 export function getPercentageDecreased(
   originalPrice: number,
   basePrice: number,

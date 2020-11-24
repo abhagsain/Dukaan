@@ -3,7 +3,7 @@ import React, { ReactElement } from "react";
 import styled from "styled-components";
 import { CategoryList } from "../components/Category";
 import Menu from "../components/Menu";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/SearchBar/SearchBar";
 import { ITopCategories, ITopProducts } from "../types";
 import { getData } from "../utils";
 import { ProductSection } from "../components/Products";

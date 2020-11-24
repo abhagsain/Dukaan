@@ -1,13 +1,12 @@
 import { GetServerSidePropsContext } from "next";
-import Link from "next/link";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement } from "react";
 import styled from "styled-components";
 import LinkMain from "../../components/Button/LinkMain";
 import { IllustrationNotFound, OuterContainer } from "../../components/helpers";
 import NotFound from "../../components/NotFound";
 import ProductList from "../../components/Products/ProductList";
-import SearchBar from "../../components/SearchBar";
-import { SBottomSpacer, SDetailNav } from "../../styles/StyledElements";
+import SearchBarFixed from "../../components/SearchBar/SearchBarFixed";
+import { SBottomSpacer } from "../../styles/StyledElements";
 import { IProduct } from "../../types";
 import { findProducts } from "../../utils";
 
@@ -16,33 +15,6 @@ interface SearchProps {
   status: "SUCCESS" | "NOT_FOUND" | "INVALID_QUERY";
   query: string;
 }
-const SearchBarHeader = ({ query }: { query: string }) => {
-  return (
-    <SSearchBarContainer>
-      <OuterContainer id="search-container">
-        <Link href="/">
-          <a>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              id="left-arrow"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-          </a>
-        </Link>
-        <SearchBar initalValue={query} />
-      </OuterContainer>
-    </SSearchBarContainer>
-  );
-};
 export default function Search({
   status,
   products,
@@ -58,7 +30,7 @@ export default function Search({
   } else if (status === "NOT_FOUND") {
     return (
       <OuterContainer>
-        <SearchBarHeader query={query} />
+        <SearchBarFixed query={query} />
         <STopMargin />
         <SIllusContainer>
           <div>
@@ -75,7 +47,7 @@ export default function Search({
   }
   return (
     <OuterContainer>
-      <SearchBarHeader query={query} />
+      <SearchBarFixed query={query} />
       <SHeadingContainer>
         <h2>
           {products.length} results for <span>"{query}"</span>
@@ -86,10 +58,7 @@ export default function Search({
     </OuterContainer>
   );
 }
-const SContainer = styled.div`
-  max-width: 20rem;
-  margin-top: 3rem;
-`;
+
 const SIllusContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -112,24 +81,7 @@ const SIllusContainer = styled.div`
     color: gray;
   }
 `;
-const SSearchBarContainer = styled.div`
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 10000;
-  left: 0;
-  background-color: ${({ theme }) => theme.colors.white};
-  /* max-width: ${({ theme }) => theme.maxWidth}; */
-  margin: 0 auto;
-  & #search-container {
-    display: flex;
-    align-items: center;
-    & #left-arrow {
-      width: 30px;
-      margin-right: 10px;
-    }
-  }
-`;
+
 const STopMargin = styled.div`
   margin: ${({ theme }) => `6rem 0 ${theme.spacing["6"]} 0`};
 `;

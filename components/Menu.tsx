@@ -19,7 +19,7 @@ export default function Menu({}: Props): ReactElement {
             <SMenuItem>Home</SMenuItem>
           </SMenuContainer>
         </Link>
-        <Link href="/" passHref>
+        <Link href="/categories" passHref>
           <SMenuContainer>
             <IconCategories />
             <SMenuItem>Categories</SMenuItem>

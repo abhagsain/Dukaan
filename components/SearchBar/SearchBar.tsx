@@ -73,6 +73,7 @@ const SSearchInput = styled.input`
   flex: 1;
   height: 39px;
   background-color: #f2f2f2;
+  font-size: ${({ theme }) => theme.fontSize.base};
   border-radius: 6px;
   line-height: normal !important;
   border: none;
