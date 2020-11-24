@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import styled from "styled-components";
+import { mediaQueries } from "../../utils";
 import { IconMinus, IconPlus } from "../helpers";
 interface Props {
   count: number;
@@ -52,6 +53,11 @@ const SProductCount = styled.p<{ buttonLarge: boolean }>`
   color: ${({ theme }) => theme.colors.accent};
   height: 100%;
   flex: 1;
+  font-size: ${({ theme }) => theme.fontSize.sm};
+  ${({ theme }) =>
+    mediaQueries("sm")(`
+    font-size: ${theme.fontSize.base};
+  `)}
 `;
 const SIconWrapper = styled.div`
   display: flex;

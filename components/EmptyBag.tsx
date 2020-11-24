@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import styled from "styled-components";
+import { mediaQueries } from "../utils";
 import LinkMain from "./Button/LinkMain";
 import { IllustrationBag } from "./helpers";
 
@@ -42,4 +43,12 @@ const SEmptyContent = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
+  & svg {
+    width: 216px;
+    margin: 0 auto;
+    ${({ theme }) =>
+      mediaQueries("md")(`
+      width: 324px;
+  `)}
+  }
 `;
