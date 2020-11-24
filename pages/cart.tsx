@@ -7,7 +7,7 @@ import EmptyBag from "../components/EmptyBag";
 import { OuterContainer } from "../components/helpers";
 import Menu from "../components/Menu";
 import { useApp } from "../context/AppContext";
-import { SBadge } from "../styles/StyledElements";
+import { SBadge, SBottomSpacer } from "../styles/StyledElements";
 
 interface Props {}
 
@@ -87,6 +87,7 @@ export default function Cart({}: Props): ReactElement {
           </SCheckoutContainer>
         </SCartCheckout>
       </SCartGrid>
+      <SBottomSpacer />
       <Menu />
     </OuterContainer>
   );
