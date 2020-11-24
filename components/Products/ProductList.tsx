@@ -11,7 +11,7 @@ import {
   SProductPrice,
 } from "../../styles/StyledElements";
 import { IProduct } from "../../types";
-import { getPercentageDecreased } from "../../utils";
+import { getPercentageDecreased, mediaQueries } from "../../utils";
 import ButtonAdd from "../Button/ButtonAdd";
 import ButtonCounter from "../Button/ButtonCounter";
 
@@ -41,6 +41,7 @@ export default function ProductList({
         const handleAddToCart = () => () => {
           addToCart(product);
         };
+        const arePricesSame = product.original_cost === product.base_cost;
         return (
           <SProductGridItem key={product.id}>
             <Link
@@ -63,14 +64,16 @@ export default function ProductList({
                 href={`/details/${category_id}/${product.id}`}
               >
                 <a>
-                  <h2>{product.name}</h2>
+                  <h2>{product.name.toLowerCase()}</h2>
                 </a>
               </Link>
               <small>{product.base_qty}</small>
               <SProductPrice>
                 <SPriceContainer>
                   <div>₹{product.base_cost}</div>
-                  <div id="base-cost">₹{product.original_cost}</div>
+                  {!arePricesSame && (
+                    <div id="base-cost">₹{product.original_cost}</div>
+                  )}
                 </SPriceContainer>
                 {isInCart ? (
                   <ButtonCounter
@@ -100,6 +103,11 @@ const SPriceContainer = styled.div`
   align-items: center;
   & div:nth-of-type(1) {
     font-weight: 500;
+    font-size: 15px;
+    ${({ theme }) =>
+      mediaQueries("sm")(`
+    font-size: ${theme.fontSize.base};
+    `)};
     padding-right: ${({ theme }) => theme.spacing["1"]};
   }
   & div:nth-of-type(2) {

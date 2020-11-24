@@ -16,7 +16,7 @@ function ProductSectionHeader({
   return (
     <SProductSectionHeader hasBackground={!!hasBackground}>
       <div>
-        <h2>{category_name}</h2>
+        <h2>{category_name.toLowerCase()}</h2>
         <SBadge>{product_count}</SBadge>
       </div>
       <Link href={`/details/${category_id}`}>

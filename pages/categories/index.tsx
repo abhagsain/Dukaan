@@ -53,6 +53,10 @@ const SCategoryGrid = styled.div`
   gap: ${({ theme }) => theme.spacing["4"]};
   ${() =>
     mediaQueries("sm")(`
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  `)}
+  ${() =>
+    mediaQueries("lg")(`
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   `)}
 `;
@@ -94,7 +98,11 @@ const SCategoryName = styled.h4`
 const SCategoryHeading = styled.h2`
   margin-top: 6rem;
   font-weight: bold;
-  font-size: ${({ theme }) => theme.fontSize["xl"]};
+  font-size: ${({ theme }) => theme.fontSize["base"]};
+  ${({ theme }) =>
+    mediaQueries("sm")(`
+    font-size: ${theme.fontSize["xl"]};
+  `)}
 `;
 export async function getServerSideProps(): Promise<{
   props: CategoryProps;

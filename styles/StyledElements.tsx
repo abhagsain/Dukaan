@@ -1,5 +1,6 @@
 import styled, { ThemeProps } from "styled-components";
 import { ITheme } from "../theme";
+import { mediaQueries } from "../utils";
 export const SDetailNav = styled.nav`
   padding: 1.5rem 0;
   position: fixed;
@@ -164,6 +165,7 @@ export const SButtonAdd = styled.button`
   }
   justify-content: center;
   align-items: center;
+  font-weight: 500;
   padding: 0.5rem 1.5rem 0.5rem 1.5rem;
   cursor: pointer;
   color: ${({ theme }) => theme.colors.accent};
@@ -205,7 +207,12 @@ export const SProductSectionHeader = styled.div<{ hasBackground?: boolean }>`
     display: flex;
   }
   & div h2 {
-    font-size: ${({ theme }) => theme.fontSize.lg};
+    text-transform: capitalize;
+    font-size: ${({ theme }) => theme.fontSize.base};
+    ${({ theme }) =>
+      mediaQueries("sm")(`
+    font-size: ${theme.fontSize.lg};
+  `)}
     font-weight: bold;
   }
   & div p {
@@ -216,17 +223,40 @@ export const SProductSectionHeader = styled.div<{ hasBackground?: boolean }>`
     color: ${({ theme }) => theme.colors.white};
     border-radius: 0.25rem;
     font-weight: 500;
+    font-size: ${({ theme }) => theme.fontSize.sm};
+    ${({ theme }) =>
+      mediaQueries("sm")(`
+      ${theme.fontSize.base}
+  `)}
   }
   & a {
     color: ${({ theme }) => theme.colors.accent};
     font-weight: 500;
+    font-size: 15px;
+    ${({ theme }) =>
+      mediaQueries("sm")(`
+      ${theme.fontSize.base}
+  `)}
   }
 `;
 export const SProductGrid = styled.div`
   display: grid;
   margin-top: ${({ theme }) => theme.spacing["4"]};
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: ${({ theme }) => theme.spacing["4"]};
+  grid-template-columns: repeat(1fr);
+  ${({ theme }) =>
+    mediaQueries("sm")(`
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  `)}
+  ${({ theme }) =>
+    mediaQueries("md")(`
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  `)}
+  ${({ theme }) =>
+    mediaQueries("lg")(`
+    gap: ${theme.spacing["6"]};
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  `)}
 `;
 export const SProductImage = styled.img`
   width: 100%;
@@ -238,15 +268,29 @@ export const SProductImage = styled.img`
 `;
 export const SProductGridItem = styled.div`
   width: 100%;
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 1rem;
+  align-items: center;
+  ${({ theme }) =>
+    mediaQueries("sm")(`
+    display: block;
+  `)}
 `;
 export const SProductBody = styled.div`
   display: flex;
   flex-direction: column;
+
   & h2 {
-    font-size: ${({ theme }) => theme.fontSize.base};
     font-weight: 500;
     transition: opacity 0.2s;
     padding-top: ${({ theme }) => theme.spacing["4"]};
+    font-size: 15px;
+    text-transform: capitalize;
+    ${({ theme }) =>
+      mediaQueries("sm")(`
+    font-size: ${theme.fontSize.base};
+    `)}
   }
   & h2:hover {
     opacity: 0.75;
