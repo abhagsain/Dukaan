@@ -13,8 +13,10 @@ export default function SearchBar({ initalValue = "" }: Props): ReactElement {
   };
   const router = useRouter();
   useEffect(() => {
-    if ("search_query" in router.query) {
-      setSearch(router.query.search_query as string);
+    if (process.browser) {
+      if ("search_query" in router.query) {
+        setSearch(router.query.search_query as string);
+      }
     }
     return () => {};
   }, [router.query]);

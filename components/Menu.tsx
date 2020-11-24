@@ -3,56 +3,69 @@ import Link from "next/link";
 import React, { ReactElement } from "react";
 import styled, { ThemedStyledFunction } from "styled-components";
 import { useApp } from "../context/AppContext";
-import { IconBag, IconCategories, IconHome, IconOrders } from "./helpers";
+import { SMenuIconBadge } from "../styles/StyledElements";
+import { mediaQueries } from "../utils";
+import {
+  IconBagActive,
+  IconBagInactive,
+  IconCategoryActive,
+  IconCategoryInactive,
+  IconHomeActive,
+  IconHomeInactive,
+  IconOrdersActive,
+  IconOrdersInactive,
+} from "./helpers";
 
 interface Props {}
 interface CustomLinkProps {
   href: string;
   children?: React.ReactNode[];
 }
-// export const CustomLink ({ href, children }: CustomLinkProps): ReactElement => {
-//   const router = useRouter()
-
-//   // let className = children.props.className || ''
-//   let isActive = false
-//   if (router.pathname === href) {
-//     isActive = true;
-//   }
-
-//   if(children)
-//   return <Link href={href}>{React.cloneElement(children, { isActive })}</Link>
-//   return <div>Hey</div>
-// }
 export default function Menu({}: Props): ReactElement {
   const { cart } = useApp();
+  const router = useRouter();
   const totalItems = cart.reduce((acc, curr) => {
     return acc + curr.count;
   }, 0);
+  // const isActive =
+  const isLinkActive = (pathname: string) => router.pathname === pathname;
+
   return (
     <SFooter>
       <SFooterWrapper>
         <Link href="/" passHref>
           <SMenuContainer>
-            <IconHome />
-            <SMenuItem>Home</SMenuItem>
+            {isLinkActive("/") ? <IconHomeActive /> : <IconHomeInactive />}
+            <SMenuItem isActive={isLinkActive("/")}>Home</SMenuItem>
           </SMenuContainer>
         </Link>
         <Link href="/categories" passHref>
           <SMenuContainer>
-            <IconCategories />
-            <SMenuItem>Categories</SMenuItem>
+            {isLinkActive("/categories") ? (
+              <IconCategoryActive />
+            ) : (
+              <IconCategoryInactive />
+            )}
+            <SMenuItem isActive={isLinkActive("/categories")}>
+              Categories
+            </SMenuItem>
           </SMenuContainer>
         </Link>
         <Link href="/cart" passHref>
           <SMenuContainer>
-            <IconBag />
-            <SMenuItem>Bag {totalItems && totalItems}</SMenuItem>
+            {isLinkActive("/cart") ? <IconBagActive /> : <IconBagInactive />}
+            <SMenuItem isActive={isLinkActive("/cart")}>Bag</SMenuItem>
+            {!!totalItems && <SMenuIconBadge>{totalItems}</SMenuIconBadge>}
           </SMenuContainer>
         </Link>
         <Link href="/" passHref>
           <SMenuContainer>
-            <IconOrders />
-            <SMenuItem>Orders</SMenuItem>
+            {isLinkActive("/orders") ? (
+              <IconOrdersActive />
+            ) : (
+              <IconOrdersInactive />
+            )}
+            <SMenuItem isActive={isLinkActive("/orders")}>Orders</SMenuItem>
           </SMenuContainer>
         </Link>
       </SFooterWrapper>
@@ -83,9 +96,25 @@ const SMenuContainer = styled.a`
   justify-content: center;
   padding: ${({ theme }) => `${theme.spacing["2"]} ${theme.spacing["4"]}`};
   font-size: ${({ theme }) => theme.fontSize.sm};
+  transition: all 0.2s;
+  & svg {
+    ${({ theme }) =>
+      mediaQueries("md")(`
+    width: 32px;
+    height: 32px;
+  `)}
+  }
+  &:hover {
+    opacity: 0.75;
+  }
 `;
-const SMenuItem = styled.p`
-  font-size: 0.875rem;
+const SMenuItem = styled.p<{ isActive: boolean }>`
   font-weight: 500;
-  color: #b3b3b3;
+  font-size: 12px;
+  ${({ theme }) =>
+    mediaQueries("sm")(`
+  font-size: ${theme.fontSize["sm"]};
+  `)}
+  color: ${({ theme, isActive }) =>
+    isActive ? theme.colors.accent : "#b3b3b3"};
 `;

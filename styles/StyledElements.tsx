@@ -370,3 +370,24 @@ export const SCategoryLabel = styled.h4`
   text-transform: capitalize;
   white-space: pre-wrap;
 `;
+export const SMenuIconBadge = styled.span`
+  position: absolute;
+  top: 7px;
+  border-radius: 50%;
+  margin-left: 26px;
+  font-size: 12px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
+  background-color: #e50b20;
+  -moz-border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  display: inline-block;
+  width: 1.1rem;
+  height: 1.1rem;
+  padding-top: 0.15rem;
+`;
