@@ -8,10 +8,12 @@ import LinkMain from "../components/Button/LinkMain";
 import Link from "next/link";
 import { useRouter } from "next/dist/client/router";
 import { useCart } from "../hooks";
+import { useApp } from "../context/AppContext";
 interface Props {}
 
 export default function Checkout({}: Props): ReactElement {
-  const { cart, clearCart } = useCart();
+  const { clearCart, cart } = useApp();
+
   useEffect(() => {
     if (process.browser && cart.length) {
       clearCart();

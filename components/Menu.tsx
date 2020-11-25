@@ -31,14 +31,8 @@ const getTotalItems = (cart: ICartProduct[]) => {
 export default function Menu({}: Props): ReactElement {
   const { cart } = useApp();
   const router = useRouter();
-  const [totalItems, setTotalItems] = useState(0);
-
-  useEffect(() => {
-    setTotalItems(getTotalItems(cart));
-  }, [cart]);
-  // const isActive =
   const isLinkActive = (pathname: string) => router.pathname === pathname;
-
+  const totalItems = getTotalItems(cart);
   return (
     <SFooter>
       <SFooterWrapper>

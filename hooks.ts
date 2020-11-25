@@ -7,6 +7,7 @@ const deserialize = JSON.parse;
 function clone<T>(item: T) {
   return JSON.parse(JSON.stringify(item));
 }
+
 export function useCart() {
   const [cart, setCart] = useState<ICartProduct[]>(() => {
     // Initialize cart with the items from local storage
@@ -22,6 +23,12 @@ export function useCart() {
     window.localStorage.setItem("cartItems", serialize(cart));
   }, [cart]);
 
+  const clearCart = () => {
+    if ("cartItems" in window.localStorage) {
+      window.localStorage.removeItem("cartItems");
+    }
+    setCart([]);
+  };
   const addToCart = (product: IProduct) => {
     // Check the product is already in the cart
     const cloned: ICartProduct[] = clone<ICartProduct[]>(cart);
@@ -43,6 +50,7 @@ export function useCart() {
     const currentFoundItemIndex = clonedCart.findIndex(
       (item) => item.id === product.id,
     );
+
     if (currentFoundItemIndex !== -1) {
       // If found decrease the count
       const currentFoundItem = clonedCart[currentFoundItemIndex];
@@ -55,11 +63,6 @@ export function useCart() {
         setCart(clonedCart);
       }
     }
-  };
-  const clearCart = () => {
-    console.log("items cleared");
-    setCart([]);
-    localStorage.removeItem("cartItems");
   };
   return { cart, addToCart, removeFromCart, setCart, clearCart };
 }
