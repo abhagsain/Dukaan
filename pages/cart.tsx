@@ -83,7 +83,7 @@ export default function Cart({}: Props): ReactElement {
               </STextContainer>
             </SCheckoutHeader>
             <SCheckoutButtonContainer>
-              <LinkMain href="/checkout">Proceed to Checkout</LinkMain>
+              <LinkMain href="/checkout">Place Order</LinkMain>
             </SCheckoutButtonContainer>
           </SCheckoutContainer>
         </SCartCheckout>

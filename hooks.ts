@@ -56,31 +56,10 @@ export function useCart() {
       }
     }
   };
-  return { cart, addToCart, removeFromCart, setCart };
-}
-export function useLocalStorageState(
-  key: string,
-  defaultValue = "",
-  { serialize = JSON.stringify, deserialize = JSON.parse } = {},
-) {
-  const [state, setState] = useState(() => {
-    const valueInLocalStorage = window.localStorage.getItem(key);
-    if (valueInLocalStorage) {
-      return deserialize(valueInLocalStorage);
-    }
-    return defaultValue;
-  });
-
-  const prevKeyRef = useRef(key);
-
-  useEffect(() => {
-    const prevKey = prevKeyRef.current;
-    if (prevKey !== key) {
-      window.localStorage.removeItem(prevKey);
-    }
-    prevKeyRef.current = key;
-    window.localStorage.setItem(key, serialize(state));
-  }, [key, state, serialize]);
-
-  return [state, setState];
+  const clearCart = () => {
+    console.log("items cleared");
+    setCart([]);
+    localStorage.removeItem("cartItems");
+  };
+  return { cart, addToCart, removeFromCart, setCart, clearCart };
 }

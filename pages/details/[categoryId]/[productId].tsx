@@ -4,6 +4,7 @@ import {
   GetStaticProps,
   GetStaticPropsContext,
 } from "next";
+import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { ReactElement } from "react";
 import styled from "styled-components";
@@ -18,6 +19,7 @@ import {
 import { useApp } from "../../../context/AppContext";
 import {
   SBaseCost,
+  SBottomSpacer,
   SButtonAdd,
   SButtonContainer,
   SCheckoutButtonLarge,
@@ -102,6 +104,7 @@ export default function ProductDetails(
     console.log(product);
     console.log("🚀 ~ file: [productId].tsx ~ line 59 ~ error", error);
   }
+  const router = useRouter();
   const foundProductInCart = cart.find((prod) => prod.id === product.id);
   return (
     <OuterContainer>
@@ -166,12 +169,18 @@ export default function ProductDetails(
                 Add To Bag
               </ButtonAddToBag>
             )}
-            <SCheckoutButtonLarge>
+            <SCheckoutButtonLarge
+              onClick={() => {
+                !foundProductInCart?.count && addToCart(product);
+                router.push("/cart");
+              }}
+            >
               {foundProductInCart?.count ? "Go to Bag" : "Buy Now"}
             </SCheckoutButtonLarge>
           </SButtonContainer>
         </SDetailContainer>
       </SDetailsGrid>
+      <SBottomSpacer />
     </OuterContainer>
   );
 }

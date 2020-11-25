@@ -1,9 +1,10 @@
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import styled, { ThemedStyledFunction } from "styled-components";
 import { useApp } from "../context/AppContext";
 import { SMenuIconBadge } from "../styles/StyledElements";
+import { ICartProduct } from "../types";
 import { mediaQueries } from "../utils";
 import {
   IconBagActive,
@@ -21,12 +22,20 @@ interface CustomLinkProps {
   href: string;
   children?: React.ReactNode[];
 }
+const getTotalItems = (cart: ICartProduct[]) => {
+  return cart.reduce((acc, curr) => {
+    return acc + curr.count;
+  }, 0);
+};
+
 export default function Menu({}: Props): ReactElement {
   const { cart } = useApp();
   const router = useRouter();
-  const totalItems = cart.reduce((acc, curr) => {
-    return acc + curr.count;
-  }, 0);
+  const [totalItems, setTotalItems] = useState(0);
+
+  useEffect(() => {
+    setTotalItems(getTotalItems(cart));
+  }, [cart]);
   // const isActive =
   const isLinkActive = (pathname: string) => router.pathname === pathname;
 

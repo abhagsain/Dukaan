@@ -317,3 +317,22 @@ export const IllustrationBag = () => (
     </g>
   </SEmtpyBagSVG>
 );
+export const IconCheckSuccess = () => {
+  return (
+    <svg
+    id="icon-success"
+      viewBox="0 0 105 105"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx={52.01} cy={52.393} r={52} fill="#3A7BC8" />
+      <path
+        d="M29.775 51.206l14.702 17.969 29.768-29.948"
+        stroke="#fff"
+        strokeWidth={7}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
