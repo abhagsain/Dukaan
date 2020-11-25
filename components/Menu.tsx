@@ -61,7 +61,7 @@ export default function Menu({}: Props): ReactElement {
             {!!totalItems && <SMenuIconBadge>{totalItems}</SMenuIconBadge>}
           </SMenuContainer>
         </Link>
-        <Link href="/" passHref>
+        <Link href="/orders" passHref>
           <SMenuContainer>
             {isLinkActive("/orders") ? (
               <IconOrdersActive />

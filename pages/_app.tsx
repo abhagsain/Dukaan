@@ -2,18 +2,17 @@ import { AppProps } from "next/app";
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { AppContext } from "../context/AppContext";
-import { useCart } from "../hooks";
+import { useCart, useOrders } from "../hooks";
 import "../styles/globals.css";
 import theme from "../theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { cart, addToCart, removeFromCart, clearCart } = useCart();
-  const [orders, setOrders] = useState(() => {
-    // Initialize orders with the items from local storage
-    return [];
-  });
+  const { orders, setOrders } = useOrders();
   return (
-    <AppContext.Provider value={{ cart, orders, addToCart, removeFromCart, clearCart }}>
+    <AppContext.Provider
+      value={{ cart, orders, addToCart, removeFromCart, clearCart, setOrders }}
+    >
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>

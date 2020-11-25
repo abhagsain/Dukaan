@@ -3,16 +3,18 @@ import { ICartProduct, IProduct } from "../types";
 
 interface IGlobalContext {
   cart: ICartProduct[];
-  orders: string[];
+  orders: ICartProduct[];
   removeFromCart: (product: IProduct) => void;
   clearCart: () => void;
   addToCart: (product: IProduct) => void;
+  setOrders: (orders: ICartProduct[]) => void;
 }
 export const AppContext = createContext<IGlobalContext>({
   cart: [],
   orders: [],
-  removeFromCart: () => {},
+  removeFromCart: (product: IProduct) => {},
   clearCart: () => {},
-  addToCart: () => {},
+  addToCart: (product: IProduct) => {},
+  setOrders: (orders: ICartProduct[]) => {},
 });
 export const useApp = () => useContext(AppContext);

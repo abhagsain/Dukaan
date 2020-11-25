@@ -7,18 +7,32 @@ const deserialize = JSON.parse;
 function clone<T>(item: T) {
   return JSON.parse(JSON.stringify(item));
 }
-
-export function useCart() {
-  const [cart, setCart] = useState<ICartProduct[]>(() => {
-    // Initialize cart with the items from local storage
-    if (process.browser) {
-      const valueInLocalStorage = window.localStorage.getItem("cartItems");
-      if (valueInLocalStorage) {
-        return deserialize(valueInLocalStorage);
-      }
+function getValueFromLocalStorage(key: string) {
+  if (process.browser) {
+    const valueInLocalStorage = window.localStorage.getItem(key);
+    if (valueInLocalStorage) {
+      return deserialize(valueInLocalStorage);
     }
-    return [];
-  });
+  }
+  return undefined;
+}
+type IOrders = ICartProduct;
+export function useOrders() {
+  const [orders, setOrders] = useState<IOrders[]>(
+    () => getValueFromLocalStorage("orders") || [],
+  );
+  function updateOrders(orders: IOrders[]) {
+    setOrders(orders);
+  }
+  useEffect(() => {
+    window.localStorage.setItem("orders", serialize(orders));
+  }, [orders]);
+  return { orders, setOrders: updateOrders };
+}
+export function useCart() {
+  const [cart, setCart] = useState<ICartProduct[]>(
+    () => getValueFromLocalStorage("cartItems") || [],
+  );
   useEffect(() => {
     window.localStorage.setItem("cartItems", serialize(cart));
   }, [cart]);

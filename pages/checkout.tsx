@@ -12,10 +12,11 @@ import { useApp } from "../context/AppContext";
 interface Props {}
 
 export default function Checkout({}: Props): ReactElement {
-  const { clearCart, cart } = useApp();
+  const { clearCart, cart, setOrders } = useApp();
 
   useEffect(() => {
     if (process.browser && cart.length) {
+      setOrders([...cart]);
       clearCart();
     }
   }, []);

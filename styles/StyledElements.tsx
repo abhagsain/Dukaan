@@ -104,7 +104,8 @@ export const SDetailContainer = styled.div`
   }
   ${({ theme }) =>
     mediaQueries("sm")(`
-  margin-left: ${theme.spacing["10"]};
+  margin-left: ${
+  theme.spacing["10"]};
 
   `)}
 `;

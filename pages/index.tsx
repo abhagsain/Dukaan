@@ -21,16 +21,9 @@ export default function Home({
 }: HomeProps): ReactElement {
   return (
     <OuterContainer>
-      {/* <div>
-        <div>Icon</div>
-        <div>
-          <div>Daily Needs</div>
-          <div>Verify Seller</div>
-        </div>
-      </div> */}
       <SearchBar />
-      <Spacer />
-      <SectionHeading>Top Categories</SectionHeading>
+      <SSpacer />
+      <SSectionHeading>Top Categories</SSectionHeading>
       <CategoryList categories={top_categories} />
       {top_products.map((product) => {
         return <ProductSection key={product.category_name} {...product} />;
@@ -46,12 +39,12 @@ export const getStaticProps: GetStaticProps<IStaticProps> = async () => {
   return { props: data };
 };
 
-export const SectionHeading = styled.h2`
+export const SSectionHeading = styled.h2`
   font-size: ${({ theme }) => theme.fontSize.xl};
   font-weight: bold;
   color: ${({ theme }) => theme.colors.primary};
   margin-bottom: ${({ theme }) => theme.spacing["5"]};
 `;
-const Spacer = styled.div`
+const SSpacer = styled.div`
   margin-top: ${({ theme }) => theme.spacing["6"]};
 `;
