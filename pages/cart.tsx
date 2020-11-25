@@ -191,10 +191,12 @@ const SCheckoutContainer = styled.div`
   `)}
 `;
 const SCheckoutHeader = styled.div`
+  margin-bottom: 6rem;
   ${({ theme }) =>
     mediaQueries("md")(`
       padding: ${theme.spacing["5"]};
       background-color: #f2f2f3;
+      margin-bottom: 0;
   `)}
 `;
 const STextContainer = styled.div`
@@ -220,15 +222,17 @@ const SCheckoutTotalText = styled.p`
 `;
 const SCheckoutButtonContainer = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   bottom: 100px;
   left: 0;
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   left: 50%;
+  padding: 0 ${({ theme }) => theme.spacing["4"]};
   transform: translateX(-50%);
   ${({ theme }) =>
     mediaQueries("md")(`
+  padding: 0;
   margin-top: ${theme.spacing["6"]};
   width: 100%;
   position: static;
