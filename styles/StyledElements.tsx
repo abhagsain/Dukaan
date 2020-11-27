@@ -209,7 +209,7 @@ export const SProductSectionHeader = styled.div<{ hasBackground?: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${({ theme }) => `${theme.spacing["4"]} 0`};
+  padding: ${({ theme }) => `${theme.spacing["4"]}`};
   border: 1px solid
     ${({ theme, hasBackground }) =>
       !hasBackground ? theme.colors.white : theme.colors.gray};
