@@ -5,6 +5,7 @@ import ButtonCounter from "../components/Button/ButtonCounter";
 import LinkMain from "../components/Button/LinkMain";
 import EmptyBag from "../components/EmptyBag";
 import { OuterContainer } from "../components/helpers";
+import Layout from "../components/Layout";
 import Menu from "../components/Menu";
 import { useApp } from "../context/AppContext";
 import { SBadge, SBottomSpacer } from "../styles/StyledElements";
@@ -19,80 +20,84 @@ export default function Cart({}: Props): ReactElement {
   }, 0);
   if (!cart.length) {
     return (
-      <OuterContainer>
-        <SCartGrid>
-          <SCartHeader>
-            <SCartHeading>Checkout</SCartHeading>
-            <SBadge>{cart.length}</SBadge>
-          </SCartHeader>
-          <EmptyBag />
-        </SCartGrid>
-        <Menu />
-      </OuterContainer>
+      <Layout title="Your bag is empty">
+        <OuterContainer>
+          <SCartGrid>
+            <SCartHeader>
+              <SCartHeading>Checkout</SCartHeading>
+              <SBadge>{cart.length}</SBadge>
+            </SCartHeader>
+            <EmptyBag />
+          </SCartGrid>
+          <Menu />
+        </OuterContainer>
+      </Layout>
     );
   }
   const totalItems = getTotalItems(cart);
 
   return (
-    <OuterContainer>
-      <SCartGrid>
-        <SCartHeader>
-          <SCartHeading>Checkout</SCartHeading>
-          {totalItems && <SBadge>{totalItems}</SBadge>}
-        </SCartHeader>
-        <SCartRow>
-          {cart.map((item) => {
-            return (
-              <SCartItem key={item.id}>
-                <Link href={`/details/`}>
-                  <a>
-                    <SCartImage src={item.image} srcSet={item.image} />
-                  </a>
-                </Link>
-                <SCartContent>
-                  <h2>{item.name.toLowerCase()}</h2>
-                  <small>{item.base_qty}</small>
-                  <SItemPriceContainer>
-                    <span>₹</span>{" "}
-                    <SItemPrice>{" " + item.base_cost.toFixed(2)}</SItemPrice>
-                  </SItemPriceContainer>
-                  <ButtonCounter
-                    count={item.count}
-                    addToCart={() => addToCart(item)}
-                    removeFromCart={() => removeFromCart(item)}
-                  />
-                </SCartContent>
-              </SCartItem>
-            );
-          })}
-        </SCartRow>
-        <SCartCheckout>
-          <SCheckoutContainer>
-            <SCheckoutHeader>
-              <STextContainer>
-                <SCheckoutText>Item Total </SCheckoutText>
-                <SCheckoutText>{total.toFixed(2)} </SCheckoutText>
-              </STextContainer>
-              <STextContainer>
-                <SCheckoutText>Delivey </SCheckoutText>
-                <SCheckoutText>30 </SCheckoutText>
-              </STextContainer>
-              <STextContainer>
-                <SCheckoutTotalText>Grand Total </SCheckoutTotalText>
-                <SCheckoutTotalText>
-                  {(total + 30).toFixed(2)}
-                </SCheckoutTotalText>
-              </STextContainer>
-            </SCheckoutHeader>
-            <SCheckoutButtonContainer>
-              <LinkMain href="/checkout">Place Order</LinkMain>
-            </SCheckoutButtonContainer>
-          </SCheckoutContainer>
-        </SCartCheckout>
-      </SCartGrid>
-      <SBottomSpacer />
-      <Menu />
-    </OuterContainer>
+    <Layout title={`Cart - ${totalItems}`}>
+      <OuterContainer>
+        <SCartGrid>
+          <SCartHeader>
+            <SCartHeading>Checkout</SCartHeading>
+            {totalItems && <SBadge>{totalItems}</SBadge>}
+          </SCartHeader>
+          <SCartRow>
+            {cart.map((item) => {
+              return (
+                <SCartItem key={item.id}>
+                  <Link href={`/details/`}>
+                    <a>
+                      <SCartImage src={item.image} srcSet={item.image} />
+                    </a>
+                  </Link>
+                  <SCartContent>
+                    <h2>{item.name.toLowerCase()}</h2>
+                    <small>{item.base_qty}</small>
+                    <SItemPriceContainer>
+                      <span>₹</span>{" "}
+                      <SItemPrice>{" " + item.base_cost.toFixed(2)}</SItemPrice>
+                    </SItemPriceContainer>
+                    <ButtonCounter
+                      count={item.count}
+                      addToCart={() => addToCart(item)}
+                      removeFromCart={() => removeFromCart(item)}
+                    />
+                  </SCartContent>
+                </SCartItem>
+              );
+            })}
+          </SCartRow>
+          <SCartCheckout>
+            <SCheckoutContainer>
+              <SCheckoutHeader>
+                <STextContainer>
+                  <SCheckoutText>Item Total </SCheckoutText>
+                  <SCheckoutText>{total.toFixed(2)} </SCheckoutText>
+                </STextContainer>
+                <STextContainer>
+                  <SCheckoutText>Delivey </SCheckoutText>
+                  <SCheckoutText>30 </SCheckoutText>
+                </STextContainer>
+                <STextContainer>
+                  <SCheckoutTotalText>Grand Total </SCheckoutTotalText>
+                  <SCheckoutTotalText>
+                    {(total + 30).toFixed(2)}
+                  </SCheckoutTotalText>
+                </STextContainer>
+              </SCheckoutHeader>
+              <SCheckoutButtonContainer>
+                <LinkMain href="/checkout">Place Order</LinkMain>
+              </SCheckoutButtonContainer>
+            </SCheckoutContainer>
+          </SCartCheckout>
+        </SCartGrid>
+        <SBottomSpacer />
+        <Menu />
+      </OuterContainer>
+    </Layout>
   );
 }
 const SCartHeader = styled.div`

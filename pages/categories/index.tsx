@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { ReactElement } from "react";
 import styled from "styled-components";
 import { OuterContainer } from "../../components/helpers";
+import Layout from "../../components/Layout";
 import Menu from "../../components/Menu";
 import SearchBarFixed from "../../components/SearchBar/SearchBarFixed";
 import {
@@ -22,28 +23,30 @@ export default function Categories({
   categories,
 }: CategoryProps): ReactElement {
   return (
-    <OuterContainer>
-      <SearchBarFixed hasBackLink={false} />
-      <SCategoryHeading>Listed Categories</SCategoryHeading>
-      <SCategoryGrid>
-        {categories.map((category) => (
-          <Link href={`/details/${category.id}`} passHref key={category.id}>
-            <SCategoryItem>
-              <img
-                src={category.image}
-                alt={category.name}
-                srcSet={category.image}
-              />
-              <SCategoryOverlay>
-                <SCategoryName>{category.name.toLowerCase()}</SCategoryName>
-              </SCategoryOverlay>
-            </SCategoryItem>
-          </Link>
-        ))}
-      </SCategoryGrid>
-      <SBottomSpacer />
-      <Menu />
-    </OuterContainer>
+    <Layout title="Categories | Dukaan">
+      <OuterContainer>
+        <SearchBarFixed hasBackLink={false} />
+        <SCategoryHeading>Listed Categories</SCategoryHeading>
+        <SCategoryGrid>
+          {categories.map((category) => (
+            <Link href={`/details/${category.id}`} passHref key={category.id}>
+              <SCategoryItem>
+                <img
+                  src={category.image}
+                  alt={category.name}
+                  srcSet={category.image}
+                />
+                <SCategoryOverlay>
+                  <SCategoryName>{category.name.toLowerCase()}</SCategoryName>
+                </SCategoryOverlay>
+              </SCategoryItem>
+            </Link>
+          ))}
+        </SCategoryGrid>
+        <SBottomSpacer />
+        <Menu />
+      </OuterContainer>
+    </Layout>
   );
 }
 const SCategoryGrid = styled.div`

@@ -1,8 +1,8 @@
 // Show categories
 import { GetServerSidePropsContext } from "next";
 import React, { ReactElement } from "react";
-import styled from "styled-components";
 import { OuterContainer } from "../../../components/helpers";
+import Layout from "../../../components/Layout";
 import Menu from "../../../components/Menu";
 import NotFound from "../../../components/NotFound";
 import ProductList from "../../../components/Products/ProductList";
@@ -23,20 +23,22 @@ export default function Category({ category }: Props): ReactElement {
     return <NotFound>Not Found</NotFound>;
   }
   return (
-    <OuterContainer>
-      <SearchBar />
-      <SProductSectionHeader hasBackground={false}>
-        <div>
-          <h2>{category.category_name}</h2>
-        </div>
-      </SProductSectionHeader>
-      <ProductList
-        products={category.products}
-        category_id={category.category_id}
-      />
-      <SBottomSpacer />
-      <Menu />
-    </OuterContainer>
+    <Layout title={`${category.category_name || "Category"}`}>
+      <OuterContainer>
+        <SearchBar />
+        <SProductSectionHeader hasBackground={false}>
+          <div>
+            <h2>{category.category_name}</h2>
+          </div>
+        </SProductSectionHeader>
+        <ProductList
+          products={category.products}
+          category_id={category.category_id}
+        />
+        <SBottomSpacer />
+        <Menu />
+      </OuterContainer>
+    </Layout>
   );
 }
 

@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import styled from "styled-components";
 import LinkMain from "./Button/LinkMain";
+import Layout from "./Layout";
 
 interface Props {
   children: string;
@@ -8,12 +9,14 @@ interface Props {
 
 export default function NotFound({ children }: Props): ReactElement {
   return (
-    <SNotFoundContainer>
-      <h2>{children}</h2>
-      <SContainer>
-        <LinkMain href="/">Let's go back</LinkMain>
-      </SContainer>
-    </SNotFoundContainer>
+    <Layout title="404 | Not Found">
+      <SNotFoundContainer>
+        <h2>{children}</h2>
+        <SContainer>
+          <LinkMain href="/">Let's go back</LinkMain>
+        </SContainer>
+      </SNotFoundContainer>
+    </Layout>
   );
 }
 const SNotFoundContainer = styled.div`

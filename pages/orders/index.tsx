@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { SSectionHeading } from "..";
 import LinkMain from "../../components/Button/LinkMain";
 import { OuterContainer } from "../../components/helpers";
+import Layout from "../../components/Layout";
 import Menu from "../../components/Menu";
 import { useApp } from "../../context/AppContext";
 import { mediaQueries } from "../../utils";
@@ -13,46 +14,59 @@ export default function Orders({}: Props): ReactElement {
   const { orders } = useApp();
   if (!orders.length) {
     return (
+      <Layout title="Orders">
+        <OuterContainer>
+          <SOrderHeader>
+            <SSectionHeading>My Orders</SSectionHeading>
+            <SSectionHeading>No Orders Placed</SSectionHeading>
+            <div style={{ marginTop: "2rem" }}></div>
+            <LinkMain href="/">Back To Shopping</LinkMain>
+          </SOrderHeader>
+        </OuterContainer>
+      </Layout>
+    );
+  }
+  const totalOrders = orders.length;
+  return (
+    <Layout
+      title={`${
+        !!totalOrders
+          ? totalOrders === 1
+            ? `${totalOrders} Order`
+            : `${totalOrders} Orders`
+          : "Orders"
+      }`}
+    >
       <OuterContainer>
         <SOrderHeader>
           <SSectionHeading>My Orders</SSectionHeading>
-          <SSectionHeading>No Orders Placed</SSectionHeading>
-          <div style={{ marginTop: "2rem" }}></div>
-          <LinkMain href="/">Back To Shopping</LinkMain>
         </SOrderHeader>
+        <SOrderContainer>
+          {orders.map((order) => (
+            <SOrderWrapper>
+              <SImageContainer>
+                <SOrderImage src={order.image} srcSet={order.image} />
+              </SImageContainer>
+              <SOrderContent>
+                <h2>{order.name.toLowerCase()}</h2>
+                <small>
+                  {order.count}
+                  {order.count > 1 ? " items" : " item"}
+                </small>
+                <SOrderPriceContainer>
+                  <div>
+                    <p id="order-count">{order.count}</p>x
+                    <p id="order-cost">₹{order.base_cost}</p>
+                  </div>
+                  <p>₹{order.base_cost * order.count}</p>
+                </SOrderPriceContainer>
+              </SOrderContent>
+            </SOrderWrapper>
+          ))}
+        </SOrderContainer>
+        <Menu />
       </OuterContainer>
-    );
-  }
-  return (
-    <OuterContainer>
-      <SOrderHeader>
-        <SSectionHeading>My Orders</SSectionHeading>
-      </SOrderHeader>
-      <SOrderContainer>
-        {orders.map((order) => (
-          <SOrderWrapper>
-            <SImageContainer>
-              <SOrderImage src={order.image} srcSet={order.image} />
-            </SImageContainer>
-            <SOrderContent>
-              <h2>{order.name.toLowerCase()}</h2>
-              <small>
-                {order.count}
-                {order.count > 1 ? " items" : " item"}
-              </small>
-              <SOrderPriceContainer>
-                <div>
-                  <p id="order-count">{order.count}</p>x
-                  <p id="order-cost">₹{order.base_cost}</p>
-                </div>
-                <p>₹{order.base_cost * order.count}</p>
-              </SOrderPriceContainer>
-            </SOrderContent>
-          </SOrderWrapper>
-        ))}
-      </SOrderContainer>
-      <Menu />
-    </OuterContainer>
+    </Layout>
   );
 }
 const SOrderImage = styled.img`

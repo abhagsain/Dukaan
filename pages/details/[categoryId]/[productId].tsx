@@ -16,6 +16,7 @@ import {
   LeftArrow,
   OuterContainer,
 } from "../../../components/helpers";
+import Layout from "../../../components/Layout";
 import { useApp } from "../../../context/AppContext";
 import {
   SBaseCost,
@@ -115,83 +116,85 @@ export default function ProductDetails(
   const foundProductInCart = cart.find((prod) => prod.id === product.id);
   const totalItems = getTotalItems(cart);
   return (
-    <OuterContainer>
-      <SDetailNav>
-        <OuterContainer>
-          <SDetailHeader>
-            <Link href="/" passHref>
-              <SGoBackLink>
-                <span>
-                  <LeftArrow />
-                </span>
-                {props.product.category_name ? (
-                  <h2>{props.product.category_name}</h2>
-                ) : (
-                  <h2>Go Back</h2>
-                )}
-              </SGoBackLink>
-            </Link>
-            <SDetailsRight>
-              <Link href="/categories" passHref>
-                <a>
-                  <IconCategory />
-                </a>
+    <Layout title={`${product.name || "Dukaan"}`}>
+      <OuterContainer>
+        <SDetailNav>
+          <OuterContainer>
+            <SDetailHeader>
+              <Link href="/" passHref>
+                <SGoBackLink>
+                  <span>
+                    <LeftArrow />
+                  </span>
+                  {props.product.category_name ? (
+                    <h2>{props.product.category_name}</h2>
+                  ) : (
+                    <h2>Go Back</h2>
+                  )}
+                </SGoBackLink>
               </Link>
-              <Link href="/cart">
-                <a className="cart-icon">
-                  <IconCart />
-                  {!!totalItems && <SIconBadge>{totalItems}</SIconBadge>}
-                </a>
-              </Link>
-            </SDetailsRight>
-          </SDetailHeader>
-        </OuterContainer>
-      </SDetailNav>
-      <SDetailsGrid>
-        <SImageContainer>
-          <SImage
-            src={product.image}
-            alt={product.name}
-            srcSet={product.image}
-          />
-        </SImageContainer>
-        <SDetailContainer>
-          <h2>{product.name}</h2>
-          <SQuantity>{product.base_qty}</SQuantity>
-          <div id="price-container">
-            <SBaseCost>₹{product.base_cost.toFixed(2)}</SBaseCost>
-            <SOriginalCost>₹{product.original_cost.toFixed(2)}</SOriginalCost>
-            {product.base_cost !== product.original_cost && (
-              <SPercentageOff>{percentage}% off</SPercentageOff>
-            )}
-          </div>
-          <SButtonContainer>
-            {/* <ButtonAdd isInCart={false} addToCart={() => addToCart(product)} /> */}
-            {!!foundProductInCart ? (
-              <ButtonCounter
-                buttonLarge
-                count={foundProductInCart?.count || 0}
-                addToCart={() => addToCart(product)}
-                removeFromCart={() => removeFromCart(product)}
-              />
-            ) : (
-              <ButtonAddToBag onClick={() => addToCart(product)}>
-                Add To Bag
-              </ButtonAddToBag>
-            )}
-            <SCheckoutButtonLarge
-              onClick={() => {
-                !foundProductInCart?.count && addToCart(product);
-                router.push("/cart");
-              }}
-            >
-              {foundProductInCart?.count ? "Go to Bag" : "Buy Now"}
-            </SCheckoutButtonLarge>
-          </SButtonContainer>
-        </SDetailContainer>
-      </SDetailsGrid>
-      <SBottomSpacer />
-    </OuterContainer>
+              <SDetailsRight>
+                <Link href="/categories" passHref>
+                  <a>
+                    <IconCategory />
+                  </a>
+                </Link>
+                <Link href="/cart">
+                  <a className="cart-icon">
+                    <IconCart />
+                    {!!totalItems && <SIconBadge>{totalItems}</SIconBadge>}
+                  </a>
+                </Link>
+              </SDetailsRight>
+            </SDetailHeader>
+          </OuterContainer>
+        </SDetailNav>
+        <SDetailsGrid>
+          <SImageContainer>
+            <SImage
+              src={product.image}
+              alt={product.name}
+              srcSet={product.image}
+            />
+          </SImageContainer>
+          <SDetailContainer>
+            <h2>{product.name}</h2>
+            <SQuantity>{product.base_qty}</SQuantity>
+            <div id="price-container">
+              <SBaseCost>₹{product.base_cost.toFixed(2)}</SBaseCost>
+              <SOriginalCost>₹{product.original_cost.toFixed(2)}</SOriginalCost>
+              {product.base_cost !== product.original_cost && (
+                <SPercentageOff>{percentage}% off</SPercentageOff>
+              )}
+            </div>
+            <SButtonContainer>
+              {/* <ButtonAdd isInCart={false} addToCart={() => addToCart(product)} /> */}
+              {!!foundProductInCart ? (
+                <ButtonCounter
+                  buttonLarge
+                  count={foundProductInCart?.count || 0}
+                  addToCart={() => addToCart(product)}
+                  removeFromCart={() => removeFromCart(product)}
+                />
+              ) : (
+                <ButtonAddToBag onClick={() => addToCart(product)}>
+                  Add To Bag
+                </ButtonAddToBag>
+              )}
+              <SCheckoutButtonLarge
+                onClick={() => {
+                  !foundProductInCart?.count && addToCart(product);
+                  router.push("/cart");
+                }}
+              >
+                {foundProductInCart?.count ? "Go to Bag" : "Buy Now"}
+              </SCheckoutButtonLarge>
+            </SButtonContainer>
+          </SDetailContainer>
+        </SDetailsGrid>
+        <SBottomSpacer />
+      </OuterContainer>
+    </Layout>
   );
 }
 export const ButtonWrapper = styled.div`

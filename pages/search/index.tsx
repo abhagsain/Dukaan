@@ -3,6 +3,7 @@ import React, { ReactElement } from "react";
 import styled from "styled-components";
 import LinkMain from "../../components/Button/LinkMain";
 import { IllustrationNotFound, OuterContainer } from "../../components/helpers";
+import Layout from "../../components/Layout";
 import NotFound from "../../components/NotFound";
 import ProductList from "../../components/Products/ProductList";
 import SearchBarFixed from "../../components/SearchBar/SearchBarFixed";
@@ -46,16 +47,18 @@ export default function Search({
     );
   }
   return (
-    <OuterContainer>
-      <SearchBarFixed query={query} />
-      <SHeadingContainer>
-        <h2>
-          {products.length} results for <span>"{query}"</span>
-        </h2>
-      </SHeadingContainer>
-      <ProductList category_id={123} products={products} />
-      <SBottomSpacer />
-    </OuterContainer>
+    <Layout title="Search">
+      <OuterContainer>
+        <SearchBarFixed query={query} />
+        <SHeadingContainer>
+          <h2>
+            {products.length} results for <span>"{query}"</span>
+          </h2>
+        </SHeadingContainer>
+        <ProductList category_id={123} products={products} />
+        <SBottomSpacer />
+      </OuterContainer>
+    </Layout>
   );
 }
 

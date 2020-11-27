@@ -9,6 +9,7 @@ import { getData } from "../utils";
 import { ProductSection } from "../components/Products";
 import { useApp } from "../context/AppContext";
 import { OuterContainer } from "../components/helpers";
+import Layout from "../components/Layout";
 
 type HomeProps = IStaticProps;
 interface IStaticProps {
@@ -20,17 +21,19 @@ export default function Home({
   top_products,
 }: HomeProps): ReactElement {
   return (
-    <OuterContainer>
-      <SearchBar />
-      <SSpacer />
-      <SSectionHeading>Top Categories</SSectionHeading>
-      <CategoryList categories={top_categories} />
-      {top_products.map((product) => {
-        return <ProductSection key={product.category_name} {...product} />;
-      })}
-      <div style={{ marginBottom: "6rem" }}></div>
-      <Menu />
-    </OuterContainer>
+    <Layout title="Dukaan - Online Shopping Site">
+      <OuterContainer>
+        <SearchBar />
+        <SSpacer />
+        <SSectionHeading>Top Categories</SSectionHeading>
+        <CategoryList categories={top_categories} />
+        {top_products.map((product) => {
+          return <ProductSection key={product.category_name} {...product} />;
+        })}
+        <div style={{ marginBottom: "6rem" }}></div>
+        <Menu />
+      </OuterContainer>
+    </Layout>
   );
 }
 

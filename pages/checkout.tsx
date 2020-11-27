@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/dist/client/router";
 import { useCart } from "../hooks";
 import { useApp } from "../context/AppContext";
+import Layout from "../components/Layout";
 interface Props {}
 
 export default function Checkout({}: Props): ReactElement {
@@ -22,22 +23,24 @@ export default function Checkout({}: Props): ReactElement {
   }, []);
 
   return (
-    <OuterContainer>
-      <SCheckoutContainer>
-        <SCheckoutWrapper>
-          <IconCheckSuccess />
-          <h2>Your Order Is Successful</h2>
-          <p>Thank you for shopping with us</p>
-          <SButtonContainer>
-            <Link href="/orders" passHref>
-              <SLinkOrders>See All Orders</SLinkOrders>
-            </Link>
-            <LinkMain href="/">Continue Shopping</LinkMain>
-          </SButtonContainer>
-        </SCheckoutWrapper>
-      </SCheckoutContainer>
-      <Menu />
-    </OuterContainer>
+    <Layout title="Your Order Is Successful">
+      <OuterContainer>
+        <SCheckoutContainer>
+          <SCheckoutWrapper>
+            <IconCheckSuccess />
+            <h2>Your Order Is Successful</h2>
+            <p>Thank you for shopping with us</p>
+            <SButtonContainer>
+              <Link href="/orders" passHref>
+                <SLinkOrders>See All Orders</SLinkOrders>
+              </Link>
+              <LinkMain href="/">Continue Shopping</LinkMain>
+            </SButtonContainer>
+          </SCheckoutWrapper>
+        </SCheckoutContainer>
+        <Menu />
+      </OuterContainer>
+    </Layout>
   );
 }
 const SCheckoutContainer = styled.div`
