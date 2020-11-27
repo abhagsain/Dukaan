@@ -5,7 +5,7 @@ import styled, { ThemedStyledFunction } from "styled-components";
 import { useApp } from "../context/AppContext";
 import { SMenuIconBadge } from "../styles/StyledElements";
 import { ICartProduct } from "../types";
-import { mediaQueries } from "../utils";
+import { getTotalItems, mediaQueries } from "../utils";
 import {
   IconBagActive,
   IconBagInactive,
@@ -22,11 +22,7 @@ interface CustomLinkProps {
   href: string;
   children?: React.ReactNode[];
 }
-const getTotalItems = (cart: ICartProduct[]) => {
-  return cart.reduce((acc, curr) => {
-    return acc + curr.count;
-  }, 0);
-};
+
 
 export default function Menu({}: Props): ReactElement {
   const { cart } = useApp();

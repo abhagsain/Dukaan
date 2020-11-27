@@ -41,6 +41,7 @@ import {
   getPercentageDecreased,
   getProduct,
   getTopProductsIds,
+  getTotalItems,
   mediaQueries,
 } from "../../../utils";
 
@@ -112,6 +113,7 @@ export default function ProductDetails(
   }
   const router = useRouter();
   const foundProductInCart = cart.find((prod) => prod.id === product.id);
+  const totalItems = getTotalItems(cart);
   return (
     <OuterContainer>
       <SDetailNav>
@@ -138,7 +140,7 @@ export default function ProductDetails(
               <Link href="/cart">
                 <a className="cart-icon">
                   <IconCart />
-                  <SIconBadge>{cart.length}</SIconBadge>
+                  {!!totalItems && <SIconBadge>{totalItems}</SIconBadge>}
                 </a>
               </Link>
             </SDetailsRight>

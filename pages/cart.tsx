@@ -8,7 +8,7 @@ import { OuterContainer } from "../components/helpers";
 import Menu from "../components/Menu";
 import { useApp } from "../context/AppContext";
 import { SBadge, SBottomSpacer } from "../styles/StyledElements";
-import { mediaQueries } from "../utils";
+import { getTotalItems, mediaQueries } from "../utils";
 
 interface Props {}
 
@@ -31,12 +31,14 @@ export default function Cart({}: Props): ReactElement {
       </OuterContainer>
     );
   }
+  const totalItems = getTotalItems(cart);
+
   return (
     <OuterContainer>
       <SCartGrid>
         <SCartHeader>
           <SCartHeading>Checkout</SCartHeading>
-          <SBadge>{cart.length}</SBadge>
+          {totalItems && <SBadge>{totalItems}</SBadge>}
         </SCartHeader>
         <SCartRow>
           {cart.map((item) => {

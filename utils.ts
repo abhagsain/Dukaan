@@ -1,6 +1,7 @@
 import data from "./pages/api/data.json";
 import {
   IAllProducts,
+  ICartProduct,
   ICategory,
   INotFound,
   IProduct,
@@ -120,4 +121,9 @@ const breakpoints = {
 export const mediaQueries = (key: keyof typeof breakpoints) => {
   return (style: TemplateStringsArray | String) =>
     `@media (min-width: ${breakpoints[key]}) { ${style} }`;
+};
+export const getTotalItems = (cart: ICartProduct[]) => {
+  return cart.reduce((acc, curr) => {
+    return acc + curr.count;
+  }, 0);
 };
