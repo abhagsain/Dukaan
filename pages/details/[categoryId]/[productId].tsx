@@ -41,6 +41,7 @@ import {
   getPercentageDecreased,
   getProduct,
   getTopProductsIds,
+  mediaQueries,
 } from "../../../utils";
 
 type ReturnData = IProducutWithCategory | INotFound;
@@ -63,7 +64,12 @@ const ButtonAddToBag = styled.button`
   color: ${({ theme }) => theme.colors.accent};
   transition: all 0.2s;
   font-weight: bold;
-  font-size: ${({ theme }) => theme.fontSize["lg"]};
+  font-size: ${({ theme }) => theme.fontSize["base"]};
+  ${({ theme }) =>
+    mediaQueries("sm")(`
+  font-size: ${theme.fontSize["sm"]};
+  
+  `)}
   &:hover {
     color: ${({ theme }) => theme.colors.accent};
     background-color: rgba(20, 110, 180, 0.1);
@@ -153,7 +159,9 @@ export default function ProductDetails(
           <div id="price-container">
             <SBaseCost>₹{product.base_cost.toFixed(2)}</SBaseCost>
             <SOriginalCost>₹{product.original_cost.toFixed(2)}</SOriginalCost>
-            <SPercentageOff>{percentage}% off</SPercentageOff>
+            {product.base_cost !== product.original_cost && (
+              <SPercentageOff>{percentage}% off</SPercentageOff>
+            )}
           </div>
           <SButtonContainer>
             {/* <ButtonAdd isInCart={false} addToCart={() => addToCart(product)} /> */}

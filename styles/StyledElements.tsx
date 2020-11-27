@@ -1,4 +1,4 @@
-import styled, { ThemeProps } from "styled-components";
+import styled, { keyframes, ThemeProps } from "styled-components";
 import { ITheme } from "../theme";
 import { mediaQueries } from "../utils";
 export const SDetailNav = styled.nav`
@@ -104,8 +104,7 @@ export const SDetailContainer = styled.div`
   }
   ${({ theme }) =>
     mediaQueries("sm")(`
-  margin-left: ${
-  theme.spacing["10"]};
+  margin-left: ${theme.spacing["10"]};
 
   `)}
 `;
@@ -210,7 +209,7 @@ export const SProductSectionHeader = styled.div<{ hasBackground?: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${({ theme }) => `${theme.spacing["4"]} ${theme.spacing["4"]}`};
+  padding: ${({ theme }) => `${theme.spacing["4"]} 0`};
   border: 1px solid
     ${({ theme, hasBackground }) =>
       !hasBackground ? theme.colors.white : theme.colors.gray};
@@ -259,7 +258,7 @@ export const SProductGrid = styled.div`
   gap: ${({ theme }) => theme.spacing["4"]};
   grid-template-columns: repeat(1fr);
   ${({ theme }) =>
-    mediaQueries("sm")(`
+    mediaQueries("md")(`
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   `)}
   ${({ theme }) =>
@@ -272,13 +271,60 @@ export const SProductGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   `)}
 `;
+
+export const SProductLink = styled.a`
+  position: relative;
+  /* height: 260px; */
+  display: flex;
+  /* border: 2px solid red; */
+  /* height: 90px; */
+  & .product-image {
+    /* height: 90px; */
+    background-color: #e5e7eb;
+    min-width: 90px;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    ${() =>
+      mediaQueries("md")(`
+    max-width: 100%;
+  `)};
+    ${() =>
+      mediaQueries("lg")(`
+    min-height: 260px;
+  `)};
+  }
+`;
 export const SProductImage = styled.img`
   width: 100%;
   border-radius: 0.5rem;
   transition: all 0.5s;
+  border-radius: 8px;
   &:hover {
     opacity: 0.75;
   }
+`;
+const pulse = keyframes`
+   0%, 100% {
+    opacity: 1;
+    background-color: #E5E7EB;
+  }
+  50% {
+    opacity: .3;
+    background-color: #F3F4F6;
+  }
+`;
+export const SProductImagePlaceholder = styled.div`
+  width: 100%;
+  max-width: 90px;
+  height: 90px;
+  border-radius: 8px;
+  /* background-color: #f9fafb; */
+  animation: ${pulse} 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  ${() =>
+    mediaQueries("sm")(`
+  `)};
 `;
 export const SProductGridItem = styled.div`
   width: 100%;
@@ -287,7 +333,7 @@ export const SProductGridItem = styled.div`
   gap: 1rem;
   align-items: center;
   ${({ theme }) =>
-    mediaQueries("sm")(`
+    mediaQueries("md")(`
     display: block;
   `)}
 `;

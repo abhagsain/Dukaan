@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import styled from "styled-components";
 import { SSectionHeading } from "..";
+import LinkMain from "../../components/Button/LinkMain";
 import { OuterContainer } from "../../components/helpers";
 import Menu from "../../components/Menu";
 import { useApp } from "../../context/AppContext";
@@ -16,6 +17,8 @@ export default function Orders({}: Props): ReactElement {
         <SOrderHeader>
           <SSectionHeading>My Orders</SSectionHeading>
           <SSectionHeading>No Orders Placed</SSectionHeading>
+          <div style={{ marginTop: "2rem" }}></div>
+          <LinkMain href="/">Back To Shopping</LinkMain>
         </SOrderHeader>
       </OuterContainer>
     );

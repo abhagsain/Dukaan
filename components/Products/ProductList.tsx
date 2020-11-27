@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import React, { ReactElement } from "react";
 import styled from "styled-components";
 import { useApp } from "../../context/AppContext";
@@ -8,6 +10,8 @@ import {
   SProductGrid,
   SProductGridItem,
   SProductImage,
+  SProductImagePlaceholder,
+  SProductLink,
   SProductPrice,
 } from "../../styles/StyledElements";
 import { IProduct } from "../../types";
@@ -18,6 +22,10 @@ import ButtonCounter from "../Button/ButtonCounter";
 interface ProductListProps {
   products: IProduct[];
   category_id: number;
+}
+
+function Placeholder({}): ReactElement {
+  return <SProductImagePlaceholder />;
 }
 
 export default function ProductList({
@@ -50,12 +58,25 @@ export default function ProductList({
               href={`/details/${category_id}/${product.id}`}
             >
               <SProductLink>
-                <SProductImage
+                {/* <div style={{ width: "100%" }}> */}
+                <LazyLoadImage
+                  effect="blur"
+                  delayTime={500}
+                  className="product-image"
+                  src={product.image}
+                  alt={product.name}
+                  placeholder={<Placeholder />}
+                  srcSet={product.image}
+                />
+                {/* </div> */}
+                {/* <SProductImage
                   src={product.image}
                   alt={product.name}
                   srcSet={product.image}
-                />
-                {/* <SProductBadge>{percentage}% Off</SProductBadge> */}
+                /> */}
+                {!arePricesSame && (
+                  <SProductBadge>{percentage}% Off</SProductBadge>
+                )}
               </SProductLink>
             </Link>
             <SProductBody>
@@ -95,9 +116,6 @@ export default function ProductList({
     </SProductGrid>
   );
 }
-const SProductLink = styled.a`
-  position: relative;
-`;
 const SPriceContainer = styled.div`
   display: flex;
   align-items: center;
@@ -118,9 +136,9 @@ const SPriceContainer = styled.div`
 `;
 const SProductBadge = styled.div`
   position: absolute;
+
   font-weight: bold;
-  top: 0;
-  right: -266px;
+
   margin-right: 6px;
   margin-top: 6px;
   white-space: nowrap;
@@ -138,4 +156,18 @@ const SProductBadge = styled.div`
   width: 68px;
   height: 22px;
   border-radius: 4px;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 8px;
+  font-size: 10px;
+  ${() =>
+    mediaQueries("md")(`
+  top: 6px;
+  right: 9px;
+  transform: none;
+  left: unset;
+  bottom: unset;
+  font-size: 12px;
+
+  `)};
 `;
