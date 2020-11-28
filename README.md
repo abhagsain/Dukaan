@@ -27,6 +27,7 @@ yarn && yarn dev
 
 ## Built with 
 
+- TypeScript
 - Next.js
 - Styled Components
 
