@@ -76,7 +76,7 @@ export function getCategory(category_id: string): IAllProducts | undefined {
   const foundCategory = data.top_products.find(
     (product) => product.category_id === Number(category_id),
   );
-  if (!foundCategory) {
+  if (!foundCategory) { 
     return undefined;
   }
   return foundCategory;

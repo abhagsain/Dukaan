@@ -13,11 +13,11 @@ import Layout from "../components/Layout";
 interface Props {}
 
 export default function Checkout({}: Props): ReactElement {
-  const { clearCart, cart, setOrders } = useApp();
+  const { clearCart, cart, setOrders, orders } = useApp();
 
   useEffect(() => {
     if (process.browser && cart.length) {
-      setOrders([...cart]);
+      setOrders([...orders, ...cart]);
       clearCart();
     }
   }, []);
