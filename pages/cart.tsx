@@ -48,11 +48,7 @@ export default function Cart({}: Props): ReactElement {
             {cart.map((item) => {
               return (
                 <SCartItem key={item.id}>
-                  <Link href={`/details/`}>
-                    <a>
-                      <SCartImage src={item.image} srcSet={item.image} />
-                    </a>
-                  </Link>
+                  <SCartImage src={item.image} srcSet={item.image} />
                   <SCartContent>
                     <h2>{item.name.toLowerCase()}</h2>
                     <small>{item.base_qty}</small>

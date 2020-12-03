@@ -10,7 +10,7 @@ export default (
   const foundCategory = data.all_products.find(
     (product) => product.category_id === Number(categoryId),
   );
-
+    
   if (!foundCategory) {
     res.statusCode = 404;
     return res.json({ message: "No Products Found" });
