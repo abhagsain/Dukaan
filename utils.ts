@@ -16,20 +16,20 @@ export function getData() {
 const notFound = { message: "Not Found" };
 export function getProduct(
   categoryId: number,
-  productId: number,
+  productId: number
 ): IProducutWithCategory | INotFound {
   if (!categoryId && !productId) {
     return notFound;
   }
   const foundCategory = data.all_products.find(
-    (prod) => prod.category_id === Number(categoryId),
+    (prod) => prod.category_id === Number(categoryId)
   );
   if (!foundCategory) {
     return notFound;
   }
   if (Array.isArray(foundCategory.products)) {
     const foundProduct = (foundCategory.products as Array<IProduct>).find(
-      (el) => el.id === Number(productId),
+      (el) => el.id === Number(productId)
     );
     if (!foundProduct) {
       return notFound;
@@ -74,9 +74,9 @@ export function getTopProductsIds(): StaticPropsReturn[] {
 
 export function getCategory(category_id: string): IAllProducts | undefined {
   const foundCategory = data.top_products.find(
-    (product) => product.category_id === Number(category_id),
+    (product) => product.category_id === Number(category_id)
   );
-  if (!foundCategory) { 
+  if (!foundCategory) {
     return undefined;
   }
   return foundCategory;
@@ -87,7 +87,7 @@ export function getCategoryList(): ITopCategories[] {
 }
 export function getPercentageDecreased(
   originalPrice: number,
-  basePrice: number,
+  basePrice: number
 ) {
   return Math.round(((originalPrice - basePrice) / originalPrice) * 100);
 }
