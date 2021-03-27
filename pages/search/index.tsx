@@ -46,6 +46,7 @@ export default function Search({
       </OuterContainer>
     );
   }
+  console.log(products)
   return (
     <Layout title="Search">
       <OuterContainer>
@@ -55,7 +56,7 @@ export default function Search({
             {products.length} results for <span>"{query}"</span>
           </h2>
         </SHeadingContainer>
-        <ProductList category_id={123} products={products} />
+        <ProductList category_id={undefined} products={products} />
         <SBottomSpacer />
       </OuterContainer>
     </Layout>

@@ -104,7 +104,9 @@ export function findProducts(query: string): IProduct[] {
   data.all_products.forEach((category) => {
     category.products.forEach((product: IProduct) => {
       if (product.name.toLowerCase().includes(query.toLowerCase())) {
-        foundProducts.push(product);
+
+        let productListWithId={...product,category_id:category.category_id}
+        foundProducts.push(productListWithId);
       }
     });
   });

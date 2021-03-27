@@ -55,8 +55,8 @@ export default function ProductList({
             <Link
               key={product.id}
               passHref
-              href={`/details/${category_id}/${product.id}`}
-            >
+              href={`/details/${category_id?category_id:product.category_id}/${product.id}`}
+            > 
               <SProductLink>
                 {/* <div style={{ width: "100%" }}> */}
                 <LazyLoadImage
@@ -82,7 +82,7 @@ export default function ProductList({
             <SProductBody>
               <Link
                 key={product.id}
-                href={`/details/${category_id}/${product.id}`}
+                href={`/details/${category_id?category_id:product.category_id}/${product.id}`}
               >
                 <a>
                   <h2>{product.name.toLowerCase()}</h2>
