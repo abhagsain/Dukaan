@@ -46,7 +46,6 @@ export default function Search({
       </OuterContainer>
     );
   }
-  console.log(products)
   return (
     <Layout title="Search">
       <OuterContainer>
