@@ -1,5 +1,5 @@
 export interface IProduct {
-  category_id: any;
+  category_id?: any;
   id: number;
   base_cost: number;
   original_cost: number;

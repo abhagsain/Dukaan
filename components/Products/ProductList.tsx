@@ -21,7 +21,7 @@ import ButtonCounter from "../Button/ButtonCounter";
 
 interface ProductListProps {
   products: IProduct[];
-  category_id: number;
+  category_id?: any;
 }
 
 function Placeholder({}): ReactElement {
