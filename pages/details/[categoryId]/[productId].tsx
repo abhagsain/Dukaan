@@ -1,10 +1,10 @@
+import { useRouter } from 'next/router'
 import {
   GetServerSidePropsContext,
   GetStaticPaths,
   GetStaticProps,
   GetStaticPropsContext,
 } from "next";
-import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React, { ReactElement } from "react";
 import styled from "styled-components";
@@ -50,6 +50,7 @@ type ReturnData = IProducutWithCategory | INotFound;
 interface ProductDetailsProps {
   product: ReturnData;
 }
+
 const ButtonAddToBag = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.accent};
   display: flex;
@@ -124,7 +125,7 @@ export default function ProductDetails(
         <SDetailNav>
           <OuterContainer>
             <SDetailHeader>
-              <Link href="/" passHref>
+              <span  onClick={()=>{router.back()}}>
                 <SGoBackLink>
                   <span>
                     <LeftArrow />
@@ -135,7 +136,7 @@ export default function ProductDetails(
                     <h2>Go Back</h2>
                   )}
                 </SGoBackLink>
-              </Link>
+              </span>
               <SDetailsRight>
                 <Link href="/categories" passHref>
                   <a>
