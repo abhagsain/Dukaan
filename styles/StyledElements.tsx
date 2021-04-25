@@ -14,6 +14,7 @@ export const SDetailNav = styled.nav`
 export const SDetailHeader = styled.div`
   /* margin-top: ${({ theme }) => theme.spacing["6"]}; */
   display: flex;
+  cursor: pointer;
   justify-content: space-between;
   & .details-icon {
     fill: #000;
